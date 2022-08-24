@@ -1,13 +1,34 @@
 .write-a-note {
     width: 400px;
-    height: 120px;
+    height: 200px;
     border-radius: 25px;
     margin: auto;
     background-color: #5a7c7c;
 }
 
+.write-a-note #note-title {
+    width: 50%;
+    display: block;
+    margin: auto;
+    border: 1px solid black;
+    height: 2em;
+    margin-top: 10px;
+    border-radius: 4px;
+    border: navajowhite;
+}
+
+.write-a-note .submit-btn {
+    width: 88px;
+    cursor: pointer;
+    display: block;
+    border-radius: 10px;
+    font-weight: bold;
+    background-color: #618f8fab;
+    margin: auto;
+}
+
 #note-text-area {
-    width: 80%;
+    width: 75%;
     margin-top: 16px;
     margin-left: 9%;
     height: 2em;
@@ -27,4 +48,9 @@
     flex-direction: row;
     cursor: pointer;
     width: 20px;
+}
+
+.write-a-note textarea {
+    height: 65px;
+    resize: none;
 }

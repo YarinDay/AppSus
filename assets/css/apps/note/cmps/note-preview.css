@@ -1,27 +1,33 @@
 .note-preview {
-    background-color: beige;
-}
-
-.text-box-container {
-    width: 150px;
-    height: 150px;
-    background-color: slategray;
-}
-
-.image-box-container {
+    background-color: rgb(146, 146, 132);
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(225px, 1fr));
     width: 300px;
     height: 300px;
-    background-color: slategray;
+    margin-top: 10px;
+    gap: 30px;
 }
 
-.video-box-container {
-    width: 300px;
-    height: 300px;
-    background-color: slategray;
+.box-container {
+    height: 230px;
+    text-align: center;
 }
 
-.todos-box-container {
-    width: 300px;
-    height: 300px;
-    background-color: slategray;
+.img-container img {
+    width: 78%;
+}
+
+.pin-btn img{
+    float: right;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.note-txt {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #0000002c;
 }

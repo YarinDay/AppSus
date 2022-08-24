@@ -1,7 +1,12 @@
 
-
 .note-list-container {
-    display: flex;
-    flex-direction: row;
-    gap: 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    /* gap: 30px; */
+}
+
+.note-title {
+    display: block;
+    height: 30px;
+    border-bottom: 1px solid #0000002c;
 }

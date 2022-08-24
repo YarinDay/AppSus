@@ -1,0 +1,15 @@
+.tool-bar-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 14px;
+    border-top: 1px solid #0000002c;
+    padding-top: 10px;
+    gap: 12px;
+}
+
+.tool-bar-container>* {
+    flex-direction: row;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+}

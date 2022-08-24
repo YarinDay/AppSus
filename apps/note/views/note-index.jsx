@@ -32,5 +32,3 @@ export class NoteIndex extends React.Component {
         </section>
     }
 }
-//Todo1 - Show the Notes 
-//Todo1 - Add Notes from Write Note 

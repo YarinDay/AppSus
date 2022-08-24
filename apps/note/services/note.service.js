@@ -6,6 +6,7 @@ export const noteService = {
     _saveToStorage,
     _loadFromStorage,
     addNoteToNotes,
+    makeId,
 }
 const KEY = 'notesDB'
 
@@ -17,14 +18,16 @@ function getNotes() {
             type: "note-txt",
             isPinned: true,
             info: {
-                txt: "Fullstack Me Baby!"
+                title: "Fullstack Me Baby!",
+                txt: "I just typeBullshit right here..."
             }
         },
         {
             id: "n102",
             type: "note-img",
+            isPinned: false,
             info: {
-                url: "http://some-img/me",
+                url: "../../assets/img/random-dog.jfif",
                 title: "Bobi and Me"
             },
             style: {
@@ -34,6 +37,7 @@ function getNotes() {
         {
             id: "n103",
             type: "note-todos",
+            isPinned: false,
             info: {
                 label: "Get my stuff together",
                 todos: [
@@ -41,10 +45,52 @@ function getNotes() {
                     { txt: "Coding power", doneAt: 187111111 }
                 ]
             }
+        },
+        {
+            id: "n104",
+            type: "note-video",
+            isPinned: true,
+            info: {
+                label: "Go-Pro Awards",
+                link: 'http://www.youtube.com/embed/watch?v=3bRgp_GSyBQ'
+            }
+        },
+        {
+            id: "n105",
+            type: "note-img",
+            isPinned: false,
+            info: {
+                url: "../../assets/img/random-shrek.png",
+                title: "Shreki <3"
+            },
+            style: {
+                backgroundColor: "#00d"
+            }
+        },
+        {
+            id: "n106",
+            type: "note-video",
+            isPinned: false,
+            info: {
+                label: "BMX Extreme Video",
+                link: 'http://www.youtube.com/embed/watch?v=13OtZFWdhwQ'
+            }
         }
     ]
     return Promise.resolve(notes)
 }
+
+function makeId(length = 6) {
+    var txt = ''
+    var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+
+    for (var i = 0; i < length; i++) {
+        txt += possible.charAt(Math.floor(Math.random() * possible.length))
+    }
+
+    return txt
+}
+
 
 function addNoteToNotes(note) {
     console.log(note)

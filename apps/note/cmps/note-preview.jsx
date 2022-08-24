@@ -1,4 +1,5 @@
 import { NoteToolBar } from "./note-tool-bar.jsx"
+import { noteService } from "../services/note.service.js"
 
 export function NotePreview({ note }) {
 
@@ -22,32 +23,51 @@ export function NotePreview({ note }) {
 }
 
 export function TextBox({ note }) {
+    let isPin = (note.isPinned) ? 'black' : 'white'
 
-
-    return <section className="text-box-container">
-        <h1>{note.info.txt}</h1>
+    return <section className="text-box-container box-container">
+        <span className="pin-btn">
+            <img src={`assets/img/${isPin}-pin.png`} />
+        </span>
+        <span className="note-title">{note.info.title}</span>
+        <span className="note-text">{note.info.txt}</span>
     </section>
 }
 
 export function ImgBox({ note }) {
-    return <section className="image-box-container">
-            <h6>{note.info.title}</h6>
-            <div><img src={note.info.url} /></div>
+    let isPin = (note.isPinned) ? 'black' : 'white'
+
+    return <section className="image-box-container box-container">
+        <span className="pin-btn">
+            <img src={`assets/img/${isPin}-pin.png`} />
+        </span>
+        <span className="note-title">{note.info.title}</span>
+        <div className="img-container"><img src={note.info.url} /></div>
     </section>
 }
 
 export function VideoBox({ note }) {
+    let isPin = (note.isPinned) ? 'black' : 'white'
 
-    return <section className="video-box-container">
+    return <section className="video-box-container box-container">
+        <span className="pin-btn">
+            <img src={`assets/img/${isPin}-pin.png`} />
+        </span>
+        <span className="note-title">{note.info.label}</span>
+        <iframe src={note.info.link} width="100%" height="95%"></iframe>
     </section>
-
 }
 
 export function TodosBox({ note }) {
+    let isPin = (note.isPinned) ? 'black' : 'white'
 
-
-    return <section className="todos-box-container">
-
+    return <section className="todos-box-container box-container">
+        <span className="pin-btn">
+            <img src={`assets/img/${isPin}-pin.png`} />
+        </span>
+        <span className="note-title">{note.info.label}</span>
+        <ul>
+            {note.info.todos.map(todo => <li key={noteService.makeId()}>{todo.txt} Done At: {todo.doneAt}</li>)}
+        </ul>
     </section>
-
 }

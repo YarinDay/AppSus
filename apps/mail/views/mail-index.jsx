@@ -13,6 +13,13 @@ export class MailIndex extends React.Component {
         this.loadMails()
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        this.showUnreadMails()
+        // console.log(prevState);
+        // console.log('this state', this.state);
+
+    }
+
     loadMails() {
         mailService.query(this.state.filterBy)
             .then((mails) => this.setState({ mails }))
@@ -24,31 +31,48 @@ export class MailIndex extends React.Component {
         })
     }
 
-    onReadMail = (mail, idx) => {
-        console.log(mail, idx)
-        const { mails } = this.state
-        if (mail.isRead === false) {
-            mails[idx].isRead = true
-            // this.setState({ mails[idx].isRead: true })
-            // this.setState({mails: mails[idx]})
-        }
+    onReadMail = (mailId) => {
+        // mails[idx].isRead = true
+        mailService.markAsRead(mailId)
+        console.log(this.state.mails);
+        // this.setState((prevState) => {
+        //     const { mails } = prevState
+        //     mails.map(mail => {
+        //         if (mail.id === mailId) mail.isRead = true
+        //     })
+        // })
+        // this.setState({ mails[idx].isRead: true })
         this.loadMails()
-        console.log(mails);
+    }
+
+    onRemoveMail = (mailId) => {
+        console.log('Removed!', mailId);
+    }
+
+    showUnreadMails = () => {
+        const { mails } = this.state
+        let unreadMails = 0
+        mails.map(mail => {
+            if (!mail.isRead) unreadMails++
+        })
+        return unreadMails
     }
 
     render() {
         const { mails } = this.state
         return <section className="mail-index">
             <div className="menu-logos">
-                <img className="grid-menu-logo" src="assets/img/grid-menu.png" />
-                <img className="inbox-logo" src="assets/img/inbox.png" />
-                <img className="star-logo" src="assets/img/star-logo.png" />
-                <img className="new-mail-logo" src="assets/img/new-mail-logo.png" />
-                <img className="sent-logo" src="assets/img/sent-logo.png" />
+                <img className="grid-menu-logo filter-logo" src="assets/img/grid-menu.png" />
+                <div className="inbox-filter-container"><img className="inbox-logo filter-logo" src="assets/img/inbox.png" /><span className="unread-mails-count">{this.showUnreadMails()}</span></div>
+                <img className="star-logo filter-logo" src="assets/img/star-logo.png" />
+                <img className="new-mail-logo filter-logo" src="assets/img/new-mail-logo.png" />
+                <img className="sent-logo filter-logo" src="assets/img/sent-logo.png" />
             </div>
-            <h1>mail app</h1>
-            <MailList mails={mails} onReadMail={this.onReadMail} />
-            <MailFilter onSetFilter={this.onSetFilter} />
+            <div className="mail-main-content">
+                <h1>mail app</h1>
+                <MailList mails={mails} onRemoveMail={this.onRemoveMail} onReadMail={this.onReadMail} />
+                <MailFilter onSetFilter={this.onSetFilter} />
+            </div>
         </section>
     }
 }

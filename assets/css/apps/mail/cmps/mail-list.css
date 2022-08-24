@@ -1,8 +1,20 @@
 .menu-logos{
-    width: 35px;
+    width: 70px;
+    padding: 5px;
+    height: 100vh;
     cursor: pointer;
+    display: flex;
+    flex-direction: column;
+}
+
+.filter-logo{
+    width: 35px;
 }
 
 .star-logo{
     background-color: black;
+}
+
+.mail-container{
+    padding: 0;
 }

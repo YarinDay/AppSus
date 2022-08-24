@@ -1,0 +1,19 @@
+.mail-index {
+    display: flex;
+}
+
+.mail-main-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.unread-mails-count{
+    font-size: 1.2rem;
+}
+
+.inbox-filter-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

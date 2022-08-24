@@ -21,7 +21,7 @@ nav a:active {
 nav a.active {
     color: darkblue;
     font-weight: bold;
-    text-decoration: overline;
+    text-decoration: underline;
 }
 
 .main-logo {
@@ -33,4 +33,6 @@ nav a.active {
 .text-logo {
     color: black;
     display: inline-block;
+    font-size: 2rem;
+    font-family: robotoSlab;
 }

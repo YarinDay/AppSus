@@ -1,3 +1,4 @@
+import { MailList } from "../cmps/mail-list.jsx"
 
 export class MailIndex extends React.Component {
 
@@ -6,10 +7,12 @@ export class MailIndex extends React.Component {
     }
 
     render() {
+        const {mails} = this.state
         return <section className="mail-index">
 
             <h1>mail app</h1>
-           {/* <MailList mails={mails} /> */}
+
+           <MailList mails={mails} />
         </section>
     }
 }

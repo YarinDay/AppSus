@@ -3,7 +3,7 @@ export function AppHeader() {
 
     return <header className="app-header">
         <Link to="/">
-            <h3><img className="main-logo" src="../assets/img/logo.png" /><span className="text-logo">AppSus.</span></h3>
+            <h3><img className="main-logo" src="assets/img/logo.png" /><span className="text-logo">AppSus.</span></h3>
         </Link>
         <nav>
             <NavLink exact to="/">Home</NavLink>

@@ -1,7 +1,9 @@
-
+export const noteService = {
+    getNotes,
+}
 
 function getNotes() {
-    const notes = [
+    let notes = [
         {
             id: "n101",
             type: "note-txt",
@@ -33,5 +35,5 @@ function getNotes() {
             }
         }
     ]
-    return notes
+    return Promise.resolve(notes)
 }

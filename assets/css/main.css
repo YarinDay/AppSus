@@ -17,6 +17,7 @@
 
 @import './cmps/user-msg.css';
 @import './cmps/app-header.css';
+@import './cmps/write.note.css';
 
 /* Apps */
 
@@ -24,3 +25,10 @@
 @import './apps/mail/cmps/mail-preview.css';
 @import './apps/mail/cmps/mail-list.css';
 @import './apps/note/views/note-app.css';
+
+/* MAIL */
+@import './apps/mail/cmps/mail-list.css';
+
+
+/* NOTES */
+@import './apps/note/cmps/write-note.css';

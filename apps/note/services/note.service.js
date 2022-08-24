@@ -1,6 +1,14 @@
+
+import { storageService } from "../services/storageService.js"
+
 export const noteService = {
     getNotes,
+    _saveToStorage,
+    _loadFromStorage,
+    addNoteToNotes,
 }
+const KEY = 'notesDB'
+
 
 function getNotes() {
     let notes = [
@@ -37,3 +45,26 @@ function getNotes() {
     ]
     return Promise.resolve(notes)
 }
+
+function addNoteToNotes(note) {
+    console.log(note)
+    // let notes = getNotes()
+    //     .then(notes => {
+    //         notes = [note, ...notes]
+    //         _saveToStorage(note)
+    //         return Promise.resolve(note)
+    //     })
+}
+
+function _saveToStorage(note) {
+    storageService.saveToStorage(KEY, note)
+}
+
+function _loadFromStorage() {
+    return storageService.loadFromStorage(KEY)
+}
+
+
+
+
+

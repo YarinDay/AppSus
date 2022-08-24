@@ -28,7 +28,3 @@
     cursor: pointer;
     width: 20px;
 }
-
-.input-btns>* :(:first-child) {
-    margin-right: 10px;
-}

@@ -35,8 +35,6 @@ export class MailDetails extends React.Component {
                 <h3>{mail.subject}</h3>
                 <h3>{mail.body}</h3>
                 <h3>{mail.sentAt}</h3>
-
-            Hellow from mail details
         </section>
     }
 

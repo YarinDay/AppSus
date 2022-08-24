@@ -2,3 +2,13 @@
     font-family: robotoSlab;
     src: url(/assets/fonts/RobotoSlab-VariableFont_wght.ttf);
 }
+
+@font-face {
+    font-family: loraItalic;
+    src: url(/assets/fonts/Lora-Italic-VariableFont_wght.ttf);
+}
+
+@font-face {
+    font-family: lora;
+    src: url(/assets/fonts/Lora-VariableFont_wght.ttf);
+}

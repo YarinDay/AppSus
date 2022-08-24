@@ -13,7 +13,7 @@ export function App() {
         <section className="app">
             <AppHeader />
             <Switch>
-                <Route path="/mail/:mailId" component={MailDetails} />
+                {/* <Route path="/mail/:mailId" component={MailDetails} /> */}
                 <Route path="/mail" component={MailIndex} />
                 <Route path="/note" component={NoteIndex} />
                 <Route path="/about" component={About} />

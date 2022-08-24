@@ -30,7 +30,7 @@ export class MailIndex extends React.Component {
         if (mail.isRead === false) {
             mails[idx].isRead = true
             // this.setState({ mails[idx].isRead: true })
-            this.setState({mails: mails[idx]})
+            // this.setState({mails: mails[idx]})
         }
         this.loadMails()
         console.log(mails);

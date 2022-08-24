@@ -6,12 +6,17 @@ import { noteService } from "../services/note.service.js"
 export class WriteNote extends React.Component {
 
     state = {
-        txt: '',
-        notes: []
+        text: '',
+        notes: [],
+        type: 'text',
     }
 
     DynamicCmp = () => {
 
+    }
+
+    getDiff = (diff) => {
+        this.setState({ type: diff })
     }
 
     componentDidMount() {
@@ -23,33 +28,45 @@ export class WriteNote extends React.Component {
 
     handleChange = ({ target }) => {
         const value = target.value
-        this.setState({ txt: value })
-        console.log(this.state.notes[0])
-        console.log(this.state.notes)
+        this.setState({ text: value })
+    }
+
+    get placeholder() {
+        const { type } = this.state
+        switch (type) {
+            case 'text':
+                return 'Enter Text Here..'
+            case 'img':
+                return 'Enter URL Here..'
+            case 'video':
+                return 'Enter Link Here..'
+            case 'options':
+                return 'Enter List with Separated ( , )..'
+        }
     }
 
     render() {
-        const { txt, notes } = this.state
-        const { handleChange, DynamicCmp } = this
+        const { text, notes } = this.state
+        const { handleChange, DynamicCmp, getDiff } = this
 
         if (!notes || !notes.length) return <div>Loading...</div>
         return <section className="write-a-note">
-            {console.log(notes)}
             {notes.map((note) => console.log(note))}
 
-            <label htmlFor="note-txt-area"></label>
+            <label htmlFor="note-text-area"></label>
             <input
                 type="text"
-                name="txt"
-                value={txt}
-                id="note-txt-area"
+                name="text"
+                value={text}
+                placeholder={this.placeholder}
+                id="note-text-area"
                 onChange={handleChange}
             />
             <section className="input-btns">
-                <img src="assets/img/camera-png.png" />
-                <img src="assets/img/video-png.png" />
-                <img src="assets/img/options-png.png" />
-                <img src="assets/img/text-png.png" />
+                <img onClick={() => getDiff('img')} src="assets/img/camera-png.png" />
+                <img onClick={() => getDiff('video')} src="assets/img/video-png.png" />
+                <img onClick={() => getDiff('options')} src="assets/img/options-png.png" />
+                <img onClick={() => getDiff('text')} src="assets/img/text-png.png" />
             </section>
         </section>
     }
@@ -67,9 +84,3 @@ export class TextBox extends React.Component {
         </label>
     }
 }
-
-
-
-//Done - Create Input Thats got a txt area
-//Done -  and title area
-//Done - Create Buttons For(Image, Video, Text, Commas)

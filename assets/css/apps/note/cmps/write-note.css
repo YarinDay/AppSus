@@ -6,7 +6,7 @@
     background-color: #5a7c7c;
 }
 
-#note-txt-area {
+#note-text-area {
     width: 80%;
     margin-top: 16px;
     margin-left: 9%;
@@ -18,11 +18,17 @@
 .input-btns {
     display: flex;
     justify-content: flex-end;
+    margin-right: 14px;
     margin-top: 30px;
     gap: 12px;
 }
 
 .input-btns>* {
     flex-direction: row;
+    cursor: pointer;
     width: 20px;
+}
+
+.input-btns>* :(:first-child) {
+    margin-right: 10px;
 }

@@ -1,8 +1,8 @@
 import { mailService } from "../services/mail.service.js"
-
-const { Link } = ReactRouterDOM
+// const { Link } = ReactRouterDOM
 
 export class MailPreview extends React.Component {
+
     state = {
         isOpen: false
     }
@@ -12,15 +12,24 @@ export class MailPreview extends React.Component {
     }
 
     render() {
-        const { mail, onReadMail, idx } = this.props
+        const { mail, onReadMail, onRemoveMail } = this.props
         const { isOpen } = this.state
         const mailDateInHours = new Date(mail.sentAt).toLocaleTimeString('en-US')
         const mailDateInDays = new Date(mail.sentAt).toLocaleDateString('en-US')
         const user = mailService.loggedInUser()
+        let isMailOpen = isOpen ? "mail-preview openned" : "mail-preview"
+        let isMailRead = mail.isRead ? "mail-read" : ""
         return <React.Fragment>
-            <article onClick={() => { this.onIsOpen(), onReadMail(mail, idx) }} className={(isOpen ? "mail-preview openned" : "mail-preview") || (mail.isRead ? "mail-preview mail-read" : "mail-preview")}>
-                {mail.subject}<span className="mail-body">{mail.body}</span> {((Date.now() - mail.sentAt) > (1000 * 60 * 60 * 24)) ? mailDateInDays : mailDateInHours}
-            </article >
+            <div className={isMailRead}>
+                <article onClick={() => { this.onIsOpen(), onReadMail(mail.id) }} className={isMailOpen}>
+                    <span className="mail-subject">{mail.subject}</span>
+                    <span className="mail-body">{mail.body}</span>
+                    <span className="mail-date">
+                        {((Date.now() - mail.sentAt) > (1000 * 60 * 60 * 24)) ? mailDateInDays : mailDateInHours}
+                    </span>
+                    <img onClick={() => onRemoveMail(mail.id)} className="remove-mail-img" src="assets/img/delete-logo.png" />
+                </article >
+            </div>
             {isOpen && <div className="msg-openned">
                 <h2>{mail.subject}</h2>
                 <p>{user.fullname}<span className="msg-mail-address">{` <${user.email}>`}</span></p>

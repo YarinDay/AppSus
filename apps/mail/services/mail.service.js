@@ -5,7 +5,8 @@ export const mailService = {
     loggedInUser,
     getMails,
     query,
-    getById
+    getById,
+    markAsRead
 }
 
 const STORAGE_KEY = 'mailsDB'
@@ -28,7 +29,7 @@ const gMails = [{
 {
     id: 'e103',
     subject: 'wassup!',
-    body: 'Where are you bro',
+    body: 'Wheasdsre are you bro',
     isRead: false,
     sentAt: 1600000000000,
     to: 'orbeker7@gmail.com'
@@ -36,7 +37,7 @@ const gMails = [{
 {
     id: 'e104',
     subject: 'wassup!',
-    body: 'Where are you bro',
+    body: 'Wheyou bro',
     isRead: false,
     sentAt: 1661352157353,
     to: 'orbeker7@gmail.com'
@@ -60,13 +61,19 @@ function query(filterBy) {
     return Promise.resolve(mails)
 }
 
-function getById(mailId){
+function getById(mailId) {
     if (!mailId) return Promise.resolve(null)
     const mails = _loadFromStorage()
     const mail = mails.find(mail => mailId === mail.id)
     return Promise.resolve(mail)
 }
 
+function markAsRead(mailId) {
+    const mails = _loadFromStorage()
+    const mail = mails.find(mail => mailId === mail.id)
+    mail.isRead = true
+    _saveToStorage(mails)
+}
 
 function loggedInUser() {
     const loggedinUser = {

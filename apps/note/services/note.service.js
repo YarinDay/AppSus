@@ -3,12 +3,13 @@ import { storageService } from "../services/storageService.js"
 
 export const noteService = {
     getNotes,
-    // _saveToStorage,
-    // _loadFromStorage,
     addNoteToNotes,
     makeId,
     query,
     saveNote,
+    getFixedTodos,
+    removeNote,
+    copyNote,
 }
 const KEY = 'notesDB'
 
@@ -20,11 +21,12 @@ function query(note) {
         _saveToStorage(notes)
     }
     // notes.push(note)
-    console.log(notes)
     return Promise.resolve(notes)
 }
 
 function saveNote(note) {
+    note.id = makeId()
+    note.isPinned = false
     let notes = _loadFromStorage()
     if (!notes || !notes.length) {
         notes = getNotes()
@@ -34,6 +36,42 @@ function saveNote(note) {
     notes.unshift(note)
     _saveToStorage(notes)
     return Promise.resolve(notes)
+}
+
+function removeNote(noteId) {
+    let notes = _loadFromStorage()
+    let noteIdx = notes.findIndex(note => note.id === noteId)
+    notes.splice(noteIdx, 1)
+    _saveToStorage(notes)
+    return Promise.resolve(notes)
+}
+
+function copyNote(note) {
+    console.log('Note :', note)
+    let notes = _loadFromStorage()
+    const newNote = _createCopyNote(note)
+    notes.unshift(newNote)
+    _saveToStorage(notes)
+    return Promise.resolve(notes)
+}
+
+function _createCopyNote(note) {
+    let newNote = {
+        type: note.type,
+        id: makeId(),
+        info: {
+            text: note.info.text,
+            title: note.info.title,
+            url: note.info.url,
+            link: note.info.link,
+            todos: note.info.todos
+        },
+    }
+    return newNote
+}
+
+function getFixedTodos(todos) {
+    // console.log('todos :', todos)
 }
 
 
@@ -119,8 +157,6 @@ function makeId(length = 6) {
 
 
 function addNoteToNotes(note) {
-    console.log(note)
-    console.log('Hello')
     // let notes = getNotes()
     //     .then(notes => {
     //         notes = [note, ...notes]

@@ -3,7 +3,7 @@
     height: 200px;
     border-radius: 25px;
     margin: auto;
-    background-color: #5a7c7c;
+    background-color: #78a7a7;
 }
 
 .write-a-note #note-title {
@@ -52,5 +52,7 @@
 
 .write-a-note textarea {
     height: 65px;
-    resize: none;
+    max-height: 40px;
+    max-width: 300px;
+    /* resize: none; */
 }

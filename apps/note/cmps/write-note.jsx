@@ -4,22 +4,18 @@ import { NotePreview } from "./note-preview.jsx"
 export class WriteNote extends React.Component {
 
     state = {
-        id: noteService.makeId(),
-        type: 'text',
-        info: {
-            txt: '',
-            title: '',
-            url: '',
-            link: '',
-            todos: []
-        },
-        isPinned: false
-
-            // img: '',
-            // txt: '',
-            // title: '',
-            // video: '',
-            // options: [],
+        note: {
+            // id: noteService.makeId(),
+            type: 'note-txt',
+            info: {
+                text: '',
+                title: '',
+                url: '',
+                link: '',
+                todos: []
+            },
+            // isPinned: false
+        }
     }
 
     componentDidUpdate() {
@@ -27,52 +23,93 @@ export class WriteNote extends React.Component {
     }
 
     saveDiff = (diff) => {
-        const { type } = this.state
-        this.setState({ type: diff })
-        this.setState({ [type]: '' })
-        this.setState({ text: '' })
+        this.setState({
+            note: {
+                info: {
+                    text: '',
+                    title: '',
+                    url: '',
+                    link: '',
+                    todos: []
+                },
+                type: diff,
+            }
+        }
+            // , console.log(this.state)
+        )
     }
 
-    
+    resetState = () => {
+        this.setState((prevState) => ({
+            note: {
+                ...prevState.note,
+                info: {
+                    text: '',
+                    title: '',
+                    url: '',
+                    link: '',
+                    todos: []
+                }
+            }
+        }))
+
+    }
+
 
     handleChange = ({ target }) => {
-        const { type } = this.state
-        const value = target.value
-        if (target.id === 'note-title') {
-            this.setState({ title: value })
-            return
-        }
-        this.setState({ [type]: value })
-        this.setState({ text: value })
+        const field = target.name
+        const value = target.type === 'number' ? +target.value : target.value
+        this.setState((prevState) => ({
+            note: {
+                ...prevState.note,
+                info: {
+                    ...prevState.note.info,
+                    [field]: value
+                }
+            }
+        }))
+        // if (field === 'todos') {
+        //     this.setState(note.info.todos.push(value))
+        // }
+
     }
 
+    // handleChange = ({ target }) => {
+    //     // const { type } = this.state
+    //     const value = target.value
+    //     if (target.name === 'title') {
+    //         this.setState({ title: value })
+    //         return
+    //     }
+    //     // this.setState({ [type]: value })
+    //     this.setState({ text: value })
+    // }
+
     saveNote = (ev) => {
-        const { type } = this.state
         ev.preventDefault()
-        this.props.onSaveNote(this.state)
-        // noteService.saveNote(this.state)
-        this.setState({ [type]: '' })
-        this.setState({ title: '' })
-        //todo - Save the note and unShift it to the notes array
-        //todo - create a add function in noteService
+        const { type } = this.state
+        this.props.onSaveNote(this.state.note)
+        // this.setState({ title: '' })
+        this.resetState()
     }
 
     get placeholder() {
-        const { type } = this.state
+        const { type } = this.state.note
         switch (type) {
-            case 'text':
+            case 'note-txt':
                 return 'Enter Text Here..'
-            case 'img':
+            case 'note-img':
                 return 'Enter URL Here..'
-            case 'video':
+            case 'note-video':
                 return 'Enter Link Here..'
-            case 'options':
+            case 'note-todos':
                 return 'Enter List with Separated ( , )..'
         }
     }
 
     render() {
-        const { text, type, title } = this.state
+        const { type } = this.state.note
+        const { text, title, url, link, todos } = this.state.note.info
         const { handleChange, saveDiff, saveNote } = this
 
         return <section className="write-a-note">
@@ -88,16 +125,33 @@ export class WriteNote extends React.Component {
                     onChange={handleChange}
                 />
                 <label htmlFor="note-text-area"></label>
-                {type !== 'text' && <input
-                    type="text"
-                    name="text"
-                    value={text}
+                {type === 'note-img' && <input
+                    type="note-img"
+                    name="url"
+                    value={url}
                     placeholder={this.placeholder}
                     id="note-text-area"
                     onChange={handleChange}
                 />}
-                {type === 'text' &&
-                    <textarea name="text"
+                {type === 'note-video' && <input
+                    type="note-video"
+                    name="link"
+                    value={link}
+                    placeholder={this.placeholder}
+                    id="note-text-area"
+                    onChange={handleChange}
+                />}
+                {type === 'note-todos' && <input
+                    type="note-todos"
+                    name="todos"
+                    value={todos}
+                    placeholder={this.placeholder}
+                    id="note-text-area"
+                    onChange={handleChange}
+                />}
+                {type === 'note-txt' &&
+                    <textarea
+                        name="text"
                         id="note-text-area"
                         value={text}
                         placeholder={this.placeholder}
@@ -108,10 +162,10 @@ export class WriteNote extends React.Component {
                     </textarea>
                 }
                 <section className="input-btns">
-                    <img onClick={() => saveDiff('img')} src="assets/img/camera-png.png" />
-                    <img onClick={() => saveDiff('video')} src="assets/img/video-png.png" />
-                    <img onClick={() => saveDiff('options')} src="assets/img/options-png.png" />
-                    <img onClick={() => saveDiff('text')} src="assets/img/text-png.png" />
+                    <img onClick={() => saveDiff('note-img')} src="assets/img/camera-png.png" />
+                    <img onClick={() => saveDiff('note-video')} src="assets/img/video-png.png" />
+                    <img onClick={() => saveDiff('note-todos')} src="assets/img/options-png.png" />
+                    <img onClick={() => saveDiff('note-txt')} src="assets/img/text-png.png" />
                 </section>
                 <button className="submit-btn">Submit Note</button>
             </form>

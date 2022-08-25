@@ -10,13 +10,9 @@ export class NoteIndex extends React.Component {
 
     componentDidMount() {
         this.loadNotes()
-        console.log('Updated', this.state.notes)
     }
 
     componentDidUpdate(prevProps, prevState) {
-        console.log('prevProps', prevProps)
-        console.log('prevState', prevState)
-        console.log('Updated', this.state.notes)
     }
 
     loadNotes = () => {
@@ -26,12 +22,20 @@ export class NoteIndex extends React.Component {
             })
     }
 
+    onRemoveNote = (noteId) => {
+        noteService.removeNote(noteId)
+            .then((notes) => this.setState({ notes }))
+        // .then(notes => this.props.onRemoveNote(notes))
+        // this.setState({ notes })
+    }
+
+    onCopyNote = (notes) => {
+        this.setState({ notes })
+    }
+
     onSaveNote = (note) => {
-        // let { notes } = this.state
-        debugger
         noteService.saveNote(note)
             .then(notes => this.setState({ notes }))
-            console.log(this.state)
         // this.loadNotes()
     }
 
@@ -40,14 +44,22 @@ export class NoteIndex extends React.Component {
 
     render() {
         const { notes } = this.state
-        const { onSaveNote } = this
+        const { onSaveNote, onRemoveNote, onCopyNote } = this
 
-        if (!notes || !notes.length) return <div>Loading...</div>
+        if (!notes || !notes.length) return <section>
+            <WriteNote
+                onSaveNote={onSaveNote}
+            />
+            <h1>No Notes At The Moment...</h1>
+        </section>
         return <section className="note-index">
 
             <h1>__AppSus Notes__</h1>
-            <WriteNote onSaveNote={onSaveNote} />
-            <NoteList notes={this.state.notes} />
+            <WriteNote
+                onSaveNote={onSaveNote}
+            />
+            <NoteList
+                notes={this.state.notes} onRemoveNote={onRemoveNote} onCopyNote={onCopyNote} />
         </section>
     }
 }

@@ -6,7 +6,8 @@ export const mailService = {
     getMails,
     query,
     getById,
-    markAsRead
+    markAsRead,
+    sendToTrash
 }
 
 const STORAGE_KEY = 'mailsDB'
@@ -16,7 +17,9 @@ const gMails = [{
     body: 'Would love to catch up sometimes',
     isRead: false,
     sentAt: 1551133930594,
-    to: 'yarindayan11@gmail.com'
+    to: 'yarindayan11@gmail.com',
+    from: 'orbeker7@gmail.com',
+    isSentToTrash: false
 },
 {
     id: 'e102',
@@ -24,7 +27,9 @@ const gMails = [{
     body: 'Where are you bro',
     isRead: false,
     sentAt: 1661352157353,
-    to: 'orbeker7@gmail.com'
+    to: 'orbeker7@gmail.com',
+    from: 'yarindayan11@gmail.com',
+    isSentToTrash: false
 },
 {
     id: 'e103',
@@ -32,7 +37,9 @@ const gMails = [{
     body: 'Wheasdsre are you bro',
     isRead: false,
     sentAt: 1600000000000,
-    to: 'orbeker7@gmail.com'
+    to: 'orbeker7@gmail.com',
+    from: 'yarindayan11@gmail.com',
+    isSentToTrash: false
 },
 {
     id: 'e104',
@@ -40,7 +47,9 @@ const gMails = [{
     body: 'Wheyou bro',
     isRead: false,
     sentAt: 1661352157353,
-    to: 'orbeker7@gmail.com'
+    to: 'orbeker7@gmail.com',
+    from: 'yarindayan11@gmail.com',
+    isSentToTrash: false
 }
 ]
 
@@ -72,6 +81,13 @@ function markAsRead(mailId) {
     const mails = _loadFromStorage()
     const mail = mails.find(mail => mailId === mail.id)
     mail.isRead = true
+    _saveToStorage(mails)
+}
+
+function sendToTrash(mailId){
+    const mails = _loadFromStorage()
+    const mail = mails.find(mail => mailId === mail.id)
+    mail.isSentToTrash = true
     _saveToStorage(mails)
 }
 

@@ -5,14 +5,11 @@
     cursor: pointer;
     display: flex;
     flex-direction: column;
+    background-color: #f2f6fc;
 }
 
 .filter-logo{
     width: 35px;
-}
-
-.star-logo{
-    background-color: black;
 }
 
 .mail-container{

@@ -3,12 +3,38 @@ import { storageService } from "../services/storageService.js"
 
 export const noteService = {
     getNotes,
-    _saveToStorage,
-    _loadFromStorage,
+    // _saveToStorage,
+    // _loadFromStorage,
     addNoteToNotes,
     makeId,
+    query,
+    saveNote,
 }
 const KEY = 'notesDB'
+
+function query(note) {
+    let notes = _loadFromStorage()
+
+    if (!notes || !notes.length) {
+        notes = getNotes()
+        _saveToStorage(notes)
+    }
+    // notes.push(note)
+    console.log(notes)
+    return Promise.resolve(notes)
+}
+
+function saveNote(note) {
+    let notes = _loadFromStorage()
+    if (!notes || !notes.length) {
+        notes = getNotes()
+        _saveToStorage(notes)
+        return Promise.resolve(notes)
+    }
+    notes.unshift(note)
+    _saveToStorage(notes)
+    return Promise.resolve(notes)
+}
 
 
 function getNotes() {
@@ -39,7 +65,7 @@ function getNotes() {
             type: "note-todos",
             isPinned: false,
             info: {
-                label: "Get my stuff together",
+                title: "Get my stuff together",
                 todos: [
                     { txt: "Driving liscence", doneAt: null },
                     { txt: "Coding power", doneAt: 187111111 }
@@ -51,7 +77,7 @@ function getNotes() {
             type: "note-video",
             isPinned: true,
             info: {
-                label: "Go-Pro Awards",
+                title: "Go-Pro Awards",
                 link: 'http://www.youtube.com/embed/watch?v=3bRgp_GSyBQ'
             }
         },
@@ -77,7 +103,7 @@ function getNotes() {
             }
         }
     ]
-    return Promise.resolve(notes)
+    return notes
 }
 
 function makeId(length = 6) {
@@ -94,6 +120,7 @@ function makeId(length = 6) {
 
 function addNoteToNotes(note) {
     console.log(note)
+    console.log('Hello')
     // let notes = getNotes()
     //     .then(notes => {
     //         notes = [note, ...notes]

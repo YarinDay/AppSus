@@ -1,34 +1,58 @@
 import { noteService } from "../services/note.service.js"
+import { NotePreview } from "./note-preview.jsx"
 
 export class WriteNote extends React.Component {
 
     state = {
-        img: '',
-        text: '',
+        id: noteService.makeId(),
         type: 'text',
-        title: '',
-        video: '',
-        options: []
+        info: {
+            txt: '',
+            title: '',
+            url: '',
+            link: '',
+            todos: []
+        },
+        isPinned: false
+
+            // img: '',
+            // txt: '',
+            // title: '',
+            // video: '',
+            // options: [],
+    }
+
+    componentDidUpdate() {
+        // console.log('Updated')
     }
 
     saveDiff = (diff) => {
+        const { type } = this.state
         this.setState({ type: diff })
+        this.setState({ [type]: '' })
+        this.setState({ text: '' })
     }
+
+    
 
     handleChange = ({ target }) => {
         const { type } = this.state
         const value = target.value
-        if(target.id === 'note-title') {
+        if (target.id === 'note-title') {
             this.setState({ title: value })
             return
         }
-        this.setState({[type]: value})
+        this.setState({ [type]: value })
         this.setState({ text: value })
     }
 
-    onSaveNote = (ev) => {
+    saveNote = (ev) => {
+        const { type } = this.state
         ev.preventDefault()
-        console.log(this.state)
+        this.props.onSaveNote(this.state)
+        // noteService.saveNote(this.state)
+        this.setState({ [type]: '' })
+        this.setState({ title: '' })
         //todo - Save the note and unShift it to the notes array
         //todo - create a add function in noteService
     }
@@ -49,10 +73,10 @@ export class WriteNote extends React.Component {
 
     render() {
         const { text, type, title } = this.state
-        const { handleChange, saveDiff } = this
+        const { handleChange, saveDiff, saveNote } = this
 
         return <section className="write-a-note">
-            <form onSubmit={this.onSaveNote}>
+            <form onSubmit={saveNote}>
 
                 <label htmlFor="note-title"></label>
                 <input

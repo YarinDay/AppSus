@@ -1,9 +1,14 @@
 import { NoteToolBar } from "./note-tool-bar.jsx"
 import { noteService } from "../services/note.service.js"
 
-export function NotePreview({ note }) {
+export class NotePreview extends React.Component {
 
-    function DynamicCmp({ note }) {
+    state = {
+        nada: null
+    }
+
+    DynamicCmp = () => {
+        const { note } = this.props
         switch (note.type) {
             case 'note-txt':
                 return <TextBox note={note} />
@@ -16,11 +21,36 @@ export function NotePreview({ note }) {
         }
     }
 
-    return <section className="note-preview">
-        <DynamicCmp note={note} />
-        <NoteToolBar />
-    </section>
+    render() {
+        const { note } = this.props
+        return <section className="note-preview">
+            {/* <DynamicCmp note={note} /> */}
+            {this.DynamicCmp(note)}
+            <NoteToolBar />
+        </section>
+    }
 }
+// export function NotePreview({ note }) {
+
+//     function DynamicCmp({ note }) {
+//         debugger
+//         switch (note.type) {
+//             case 'note-txt':
+//                 return <TextBox note={note} />
+//             case 'note-img':
+//                 return <ImgBox note={note} />
+//             case 'note-video':
+//                 return <VideoBox note={note} />
+//             case 'note-todos':
+//                 return <TodosBox note={note} />
+//         }
+//     }
+
+//     return <section className="note-preview">
+//         <DynamicCmp note={note} />
+//         <NoteToolBar />
+//     </section>
+// }
 
 export function TextBox({ note }) {
     let isPin = (note.isPinned) ? 'black' : 'white'
@@ -53,7 +83,7 @@ export function VideoBox({ note }) {
         <span className="pin-btn">
             <img src={`assets/img/${isPin}-pin.png`} />
         </span>
-        <span className="note-title">{note.info.label}</span>
+        <span className="note-title">{note.info.title}</span>
         <iframe src={note.info.link} width="100%" height="95%"></iframe>
     </section>
 }
@@ -65,7 +95,7 @@ export function TodosBox({ note }) {
         <span className="pin-btn">
             <img src={`assets/img/${isPin}-pin.png`} />
         </span>
-        <span className="note-title">{note.info.label}</span>
+        <span className="note-title">{note.info.title}</span>
         <ul>
             {note.info.todos.map(todo => <li key={noteService.makeId()}>{todo.txt} Done At: {todo.doneAt}</li>)}
         </ul>

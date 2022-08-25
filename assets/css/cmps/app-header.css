@@ -1,13 +1,11 @@
-header {
-    background: rgb(120, 167, 167);
-    border-bottom: 2px solid white;
-}
 
 .app-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px 0;
+    background: rgb(120, 167, 167);
+    border-bottom: 2px solid white;
 }
 
 nav a {

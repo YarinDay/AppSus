@@ -18,14 +18,12 @@
 @import './cmps/app-header.css';
 @import './cmps/write.note.css';
 
-/* Apps */
-
-@import './apps/mail/views/mail-app.css';
-@import './apps/mail/cmps/mail-preview.css';
-@import './apps/mail/cmps/mail-list.css';
 
 /* MAIL */
+@import './apps/mail/views/mail-app.css';
 @import './apps/mail/cmps/mail-list.css';
+@import './apps/mail/cmps/mail-preview.css';
+@import './apps/mail/cmps/mail-compose.css';
 
 /* NOTES */
 @import './apps/note/views/note-app.css';

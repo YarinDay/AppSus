@@ -23,6 +23,11 @@
     margin-left: 10px;
 }
 
+.mail-preview .star-mail-img {
+    right: 0;
+    margin-left: 10px;
+}
+
 .mail-preview .mail-date {
     margin-inline-start: auto;
 }
@@ -54,6 +59,14 @@
 }
 
 .remove-mail-img:hover {
+    width: 21px;
+}
+
+.star-mail-img {
+    width: 20px;
+}
+
+.star-mail-img:hover {
     width: 21px;
 }
 

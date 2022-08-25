@@ -1,0 +1,64 @@
+.mail-compose-container {
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    width: 300px;
+    background-color: white;
+    z-index: 10;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+}
+
+.mail-compose-container>* {
+    border-bottom: 1px solid #121212;
+}
+
+.mail-compose-header {
+    background-color: #f2f6fc;
+}
+
+.mail-compose-form {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    height: 100%;
+}
+
+.mail-compose-form button {
+    margin-top: auto;
+    align-items: center;
+    background-color: #0A66C2;
+    border: 0;
+    color: #ffffff;
+    border-radius: 100px;
+    max-width: 100px;
+    line-height: 20px;
+    transition: background-color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, box-shadow 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+    cursor: pointer;
+    min-width: 0px;
+    padding: 10px 20px;
+    margin: 5px;
+}
+
+.mail-compose-form button:hover {
+    background-color: #16437E;
+    color: #ffffff;
+}
+
+.mail-compose-form button:active {
+    background: #0f3c6a;
+    color: rgb(255, 255, 255, .7);
+}
+
+#new-mail-body {
+    height: 100%;
+    resize: none;
+    flex-grow: 1;
+}
+
+.new-mail-tools {
+    margin-top: auto;
+    text-align: right;
+}

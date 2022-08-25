@@ -31,16 +31,16 @@ export class MailFilter extends React.Component {
         const { subject } = this.state.filterBy
         return <section className="mail-filter">
             <form onSubmit={this.onFilter}>
-                <label htmlFor="by-subject">Txt :</label>
+                <label htmlFor="by-subject"></label>
                 <input
                     type="text"
-                    placeholder="by subject.."
+                    placeholder="Search mail"
                     id="by-subject"
                     name="subject"
                     value={subject}
                     onChange={this.handleChange}
                 />
-                <button>Filter!</button>
+                <button hidden>Filter!</button>
             </form>
         </section>
     }

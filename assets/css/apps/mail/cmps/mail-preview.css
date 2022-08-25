@@ -2,6 +2,7 @@
     display: flex;
     cursor: pointer;
     font-weight: bold;
+    height: 20px;
     padding: 5px;
 }
 
@@ -16,16 +17,6 @@
 .mail-preview:hover {
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
     font-size: 1.05rem;
-}
-
-.mail-preview .remove-mail-img {
-    right: 0;
-    margin-left: 10px;
-}
-
-.mail-preview .star-mail-img {
-    right: 0;
-    margin-left: 10px;
 }
 
 .mail-preview .mail-date {
@@ -48,6 +39,11 @@
     font-size: 1rem;
 }
 
+.msg-openned .msg-oppened-header {
+    display: flex;
+    align-items: center;
+}
+
 .msg-mail-address {
     margin: 0;
     color: var(--clr5);
@@ -56,6 +52,8 @@
 
 .remove-mail-img {
     width: 20px;
+    padding: 3px;
+    margin-left: auto;
 }
 
 .remove-mail-img:hover {
@@ -64,6 +62,7 @@
 
 .star-mail-img {
     width: 20px;
+    padding: 3px;
 }
 
 .star-mail-img:hover {

@@ -9,25 +9,27 @@ export class MailIndex extends React.Component {
         mails: [],
         filterBy: null,
         folder: 'inbox',
-        newMail: false
+        newMail: false,
+        draftMails: []
     }
 
     componentDidMount() {
         this.loadMails()
     }
-    
+
     componentDidUpdate(prevProps, prevState) {
         this.showUnreadMails()
+        console.log('draftMails:', this.state.draftMails);
         // console.log(prevState);
         // console.log('this state', this.state);
-        
+
     }
-    
+
     loadMails() {
         mailService.query(this.state.filterBy, this.state.folder)
-        .then((mails) => this.setState({ mails }))
+            .then((mails) => this.setState({ mails }))
     }
-    
+
     onSetFilter = (filterBy) => {
         this.setState({ filterBy }, () => {
             this.loadMails()
@@ -65,11 +67,23 @@ export class MailIndex extends React.Component {
         this.setState({ newMail: !this.state.newMail })
     }
 
-    onAddMail = (mail, ev) => {
-        ev.preventDefault()
-        console.log(mail);
+    onAddMail = (mail) => {
+        if (mail.body === '') mail.body = 'No Body Msg'
+        if (mail.subject === '') mail.subject = 'No subject Msg'
         mailService.addNewMail(mail)
         this.loadMails()
+    }
+
+    onAddDraftMail = (mail) => {
+        const { draftMails } = this.state
+        // this.setState({ draftMails: draftMails.unshift(mail) })
+        this.setState(prevState => ({
+            draftMails: [...prevState.draftMails, mail]
+        }))
+        if (mail.body === '') mail.body = 'No Body Msg'
+        if (mail.subject === '') mail.subject = 'No subject Msg'
+        mailService.addDraftMail(mail)
+        this.loadMails() // maybe not necessary
     }
 
     showUnreadMails = () => {
@@ -91,7 +105,7 @@ export class MailIndex extends React.Component {
             <div className="mail-main-content">
                 <MailFilter onSetFilter={this.onSetFilter} />
                 <MailList mails={mails} onRemoveMail={this.onRemoveMail} onStarMail={this.onStarMail} onReadMail={this.onReadMail} />
-                {newMail && <MailCompose onAddMail={this.onAddMail} />}
+                {newMail && <MailCompose onAddMail={this.onAddMail} onAddDraftMail={this.onAddDraftMail} />}
             </div>
         </section>
     }

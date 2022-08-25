@@ -11,7 +11,8 @@ export const mailService = {
     markAsRead,
     sendToTrash,
     toggleStarMail,
-    getUnreadMails
+    getUnreadMails,
+    addDraftMail
 }
 
 const STORAGE_KEY = 'mailsDB'
@@ -75,11 +76,13 @@ function query(filterBy, folder) {
 
     if (folder === 'inbox') {
         mails = mails.filter(mail => !mail.isSentToTrash
-            && mail.to === loggedinUser.email)
+            && mail.to === loggedinUser.email
+            && mail.sentAt)
     }
     else if (folder === 'trash') {
         mails = mails.filter(mail => mail.isSentToTrash
-            && mail.to === loggedinUser.email)
+            && mail.to === loggedinUser.email
+            && mail.sentAt)
     }
     else if (folder === 'stared') {
         mails = mails.filter(mail => mail.isStared
@@ -87,11 +90,12 @@ function query(filterBy, folder) {
     }
     else if (folder === 'draft') {
         mails = mails.filter(mail => !mail.sentAt
-            && mail.to === loggedinUser.email)
+            && mail.from === loggedinUser.email)
     }
     else if (folder === 'sent') {
         mails = mails.filter(mail => mail.from === loggedinUser.email
-            && mail.to === loggedinUser.email)
+            && mail.from === loggedinUser.email
+            && mail.sentAt)
     }
 
     if (filterBy) {
@@ -118,6 +122,15 @@ function addNewMail(mail) {
     mail.from = user.email
     mail.fullname = user.fullname
     mail.sentAt = Date.now()
+    mails.push(mail)
+    _saveToStorage(mails)
+}
+function addDraftMail(mail) {
+    const mails = _loadFromStorage()
+    const user = loggedInUser()
+    mail.id = utilService.makeId()
+    mail.from = user.email
+    mail.fullname = user.fullname
     mails.push(mail)
     _saveToStorage(mails)
 }

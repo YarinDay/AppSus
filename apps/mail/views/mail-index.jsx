@@ -47,6 +47,8 @@ export class MailIndex extends React.Component {
 
     onRemoveMail = (mailId) => {
         console.log('Removed!', mailId);
+        mailService.sendToTrash(mailId)
+        this.loadMails()
     }
 
     showUnreadMails = () => {
@@ -62,16 +64,16 @@ export class MailIndex extends React.Component {
         const { mails } = this.state
         return <section className="mail-index">
             <div className="menu-logos">
-                <img className="grid-menu-logo filter-logo" src="assets/img/grid-menu.png" />
+                <div><img className="grid-menu-logo filter-logo" src="assets/img/grid-menu.png" /></div>
                 <div className="inbox-filter-container"><img className="inbox-logo filter-logo" src="assets/img/inbox.png" /><span className="unread-mails-count">{this.showUnreadMails()}</span></div>
-                <img className="star-logo filter-logo" src="assets/img/star-logo.png" />
-                <img className="new-mail-logo filter-logo" src="assets/img/new-mail-logo.png" />
-                <img className="sent-logo filter-logo" src="assets/img/sent-logo.png" />
+                <div><img className="star-logo filter-logo" src="assets/img/star-logo.png" /></div>
+                <div><img className="new-mail-logo filter-logo" src="assets/img/new-mail-logo.png" /></div>
+                <div><img className="sent-logo filter-logo" src="assets/img/sent-logo.png" /></div>
+                <div><img className="trash-mail-logo filter-logo" src="assets/img/trash-mails-icon.png" /></div>
             </div>
             <div className="mail-main-content">
-                <h1>mail app</h1>
-                <MailList mails={mails} onRemoveMail={this.onRemoveMail} onReadMail={this.onReadMail} />
                 <MailFilter onSetFilter={this.onSetFilter} />
+                <MailList mails={mails} onRemoveMail={this.onRemoveMail} onReadMail={this.onReadMail} />
             </div>
         </section>
     }

@@ -27,9 +27,9 @@
     margin-inline-start: auto;
 }
 
-.mail-preview .mail-body {
-    /* margin-inline-start: auto; */
-}
+/* .mail-preview .mail-body {
+    margin-inline-start: auto;
+} */
 
 .msg-openned {
     padding: 20px;

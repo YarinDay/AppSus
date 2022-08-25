@@ -20,7 +20,7 @@ export class MailPreview extends React.Component {
         let isMailOpen = isOpen ? "mail-preview openned" : "mail-preview"
         let isMailRead = mail.isRead ? "mail-read" : ""
         return <React.Fragment>
-            <div className={isMailRead}>
+            {!mail.isSentToTrash && <div className={isMailRead}>
                 <article onClick={() => { this.onIsOpen(), onReadMail(mail.id) }} className={isMailOpen}>
                     <span className="mail-subject">{mail.subject}</span>
                     <span className="mail-body">{mail.body}</span>
@@ -29,8 +29,8 @@ export class MailPreview extends React.Component {
                     </span>
                     <img onClick={() => onRemoveMail(mail.id)} className="remove-mail-img" src="assets/img/delete-logo.png" />
                 </article >
-            </div>
-            {isOpen && <div className="msg-openned">
+            </div>}
+            {(isOpen && !mail.isSentToTrash) && <div className="msg-openned">
                 <h2>{mail.subject}</h2>
                 <p>{user.fullname}<span className="msg-mail-address">{` <${user.email}>`}</span></p>
                 <p className="msg-body">{mail.body}</p>

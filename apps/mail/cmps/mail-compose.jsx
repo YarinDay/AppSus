@@ -12,8 +12,7 @@ export class MailCompose extends React.Component {
             to: '',
             isSentToTrash: false,
             isStared: false
-        },
-        draftMails: []
+        }
     }
 
     intervalId = null
@@ -26,7 +25,9 @@ export class MailCompose extends React.Component {
 
     componentWillUnmount() {
         const { newMail } = this.state
-        if (!newMail.sentAt) console.log('Hey');
+        if (!newMail.sentAt && newMail.to !== '') {
+            this.props.onAddDraftMail(newMail)
+        }
         clearInterval(this.intervalId)
     }
 
@@ -48,23 +49,7 @@ export class MailCompose extends React.Component {
         ev.preventDefault()
         const { newMail } = this.state
         if (newMail.to === '') return
-        // if (newMail.body === '') {
-        //     this.setState((prevState) => ({
-        //         newMail: {
-        //             ...prevState.newMail,
-        //             body: 'No Body Msg'
-        //         }
-        //     }))
-        // }
-        // if (newMail.subject === '') {
-        //     this.setState((prevState) => ({
-        //         newMail: {
-        //             ...prevState.newMail,
-        //             subject: 'No subject Msg'
-        //         }
-        //     }))
-        // }
-            this.props.onAddMail(newMail, ev)
+        this.props.onAddMail(newMail, ev)
         this.resetMailData()
     }
 

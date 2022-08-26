@@ -10,10 +10,20 @@
 
 .unread-mails-count{
     font-size: 1.2rem;
+    margin-inline-start: auto;
+    margin-right: 5px;
 }
 
 .inbox-filter-container{
     display: flex;
-    justify-content: space-between;
     align-items: center;
+}
+
+#by-subject{
+    width: 500px;
+    background-color: var(--clr8);
+    padding: 15px;
+    font-size: 1.3rem;
+    border-radius: 10px;
+    border: none;
 }

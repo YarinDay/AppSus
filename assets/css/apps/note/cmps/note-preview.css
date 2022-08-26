@@ -1,28 +1,46 @@
 .note-preview {
-    background-color: rgb(146, 146, 132);
     border-radius: 10px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(225px, 1fr));
+    justify-content: space-around;
+    /* grid-template-columns: repeat(auto-fit, minmax(225px, 1fr)); */
     width: 300px;
-    height: 300px;
+    height: 260px;
     margin-top: 10px;
-    gap: 30px;
 }
 
 .box-container {
     height: 230px;
+    border-radius: 7px;
     text-align: center;
+    overflow: hidden;
+    word-wrap: break-word;
+}
+
+.img-container {
+width: 100%;
+height: 100%;
+}
+
+.each-todo {
+    text-align: left;
 }
 
 .img-container img {
-    width: 78%;
+    height: 100%;
+    top: 20px;
+    margin-bottom: 20px;
+    background-repeat: round;
 }
 
-.pin-btn img{
+.pin-btn img {
     float: right;
     width: 30px;
     height: 30px;
     cursor: pointer;
+}
+
+.note-title {
+    font-weight: bold;
 }
 
 .note-txt {

@@ -2,6 +2,16 @@ import { NoteList } from "../cmps/note-list.jsx"
 import { WriteNote } from "../cmps/write-note.jsx"
 import { noteService } from "../../note/services/note.service.js"
 
+//Todo's For this App {
+// * 
+// ?
+// ! --- Look at the presentation and see whats missing!
+//Todo - Finish the todos Part (Get a string separated by (,)and just enter each line to Li inside UL)
+//Todo - Start Working on Media-Queries!!!!!!!!!
+//Todo - Work on the share BTN
+//Todo - Work on the gif
+// }
+
 export class NoteIndex extends React.Component {
 
     state = {
@@ -10,9 +20,6 @@ export class NoteIndex extends React.Component {
 
     componentDidMount() {
         this.loadNotes()
-    }
-
-    componentDidUpdate(prevProps, prevState) {
     }
 
     loadNotes = () => {
@@ -25,26 +32,32 @@ export class NoteIndex extends React.Component {
     onRemoveNote = (noteId) => {
         noteService.removeNote(noteId)
             .then((notes) => this.setState({ notes }))
-        // .then(notes => this.props.onRemoveNote(notes))
-        // this.setState({ notes })
     }
 
-    onCopyNote = (notes) => {
-        this.setState({ notes })
+    onCopyNote = (note) => {
+        noteService.copyNote(note)
+            .then((notes) => this.setState({ notes }))
+    }
+
+    changeNoteBgc = (noteId, bgcColor) => {
+        noteService.changeBgc(noteId, bgcColor)
+            .then((notes) => this.setState({ notes }))
     }
 
     onSaveNote = (note) => {
+        if (note.info.text === '' && note.info.title === '') return
         noteService.saveNote(note)
             .then(notes => this.setState({ notes }))
-        // this.loadNotes()
     }
 
-    //todo - Add the note to the notes array
-    //Todo - SetState so it can Re-Render
+    onClickedPin = (noteId) => {
+        noteService.changeNotePinStatus(noteId)
+            .then((notes) => this.setState({ notes }))
+    }
 
     render() {
         const { notes } = this.state
-        const { onSaveNote, onRemoveNote, onCopyNote } = this
+        const { onSaveNote, onRemoveNote, onCopyNote, changeNoteBgc, onClickedPin } = this
 
         if (!notes || !notes.length) return <section>
             <WriteNote
@@ -54,12 +67,17 @@ export class NoteIndex extends React.Component {
         </section>
         return <section className="note-index">
 
-            <h1>__AppSus Notes__</h1>
+            <h1 className="main-appsus-title">__AppSus Notes__</h1>
             <WriteNote
                 onSaveNote={onSaveNote}
             />
             <NoteList
-                notes={this.state.notes} onRemoveNote={onRemoveNote} onCopyNote={onCopyNote} />
+                notes={this.state.notes}
+                onRemoveNote={onRemoveNote}
+                onCopyNote={onCopyNote}
+                changeNoteBgc={changeNoteBgc}
+                onClickedPin={onClickedPin}
+            />
         </section>
     }
 }

@@ -5,21 +5,15 @@ export class WriteNote extends React.Component {
 
     state = {
         note: {
-            // id: noteService.makeId(),
             type: 'note-txt',
             info: {
                 text: '',
                 title: '',
                 url: '',
                 link: '',
-                todos: []
+                todos: ''
             },
-            // isPinned: false
         }
-    }
-
-    componentDidUpdate() {
-        // console.log('Updated')
     }
 
     saveDiff = (diff) => {
@@ -30,13 +24,11 @@ export class WriteNote extends React.Component {
                     title: '',
                     url: '',
                     link: '',
-                    todos: []
+                    todos: ''
                 },
                 type: diff,
             }
-        }
-            // , console.log(this.state)
-        )
+        })
     }
 
     resetState = () => {
@@ -48,13 +40,12 @@ export class WriteNote extends React.Component {
                     title: '',
                     url: '',
                     link: '',
-                    todos: []
+                    todos: ''
                 }
             }
         }))
 
     }
-
 
     handleChange = ({ target }) => {
         const field = target.name
@@ -68,28 +59,11 @@ export class WriteNote extends React.Component {
                 }
             }
         }))
-        // if (field === 'todos') {
-        //     this.setState(note.info.todos.push(value))
-        // }
-
     }
-
-    // handleChange = ({ target }) => {
-    //     // const { type } = this.state
-    //     const value = target.value
-    //     if (target.name === 'title') {
-    //         this.setState({ title: value })
-    //         return
-    //     }
-    //     // this.setState({ [type]: value })
-    //     this.setState({ text: value })
-    // }
 
     saveNote = (ev) => {
         ev.preventDefault()
-        const { type } = this.state
         this.props.onSaveNote(this.state.note)
-        // this.setState({ title: '' })
         this.resetState()
     }
 
@@ -114,7 +88,6 @@ export class WriteNote extends React.Component {
 
         return <section className="write-a-note">
             <form onSubmit={saveNote}>
-
                 <label htmlFor="note-title"></label>
                 <input
                     type="title"
@@ -124,6 +97,7 @@ export class WriteNote extends React.Component {
                     id="note-title"
                     onChange={handleChange}
                 />
+
                 <label htmlFor="note-text-area"></label>
                 {type === 'note-img' && <input
                     type="note-img"
@@ -133,6 +107,7 @@ export class WriteNote extends React.Component {
                     id="note-text-area"
                     onChange={handleChange}
                 />}
+
                 {type === 'note-video' && <input
                     type="note-video"
                     name="link"
@@ -141,6 +116,7 @@ export class WriteNote extends React.Component {
                     id="note-text-area"
                     onChange={handleChange}
                 />}
+
                 {type === 'note-todos' && <input
                     type="note-todos"
                     name="todos"
@@ -149,6 +125,7 @@ export class WriteNote extends React.Component {
                     id="note-text-area"
                     onChange={handleChange}
                 />}
+
                 {type === 'note-txt' &&
                     <textarea
                         name="text"
@@ -161,6 +138,7 @@ export class WriteNote extends React.Component {
                     >
                     </textarea>
                 }
+                
                 <section className="input-btns">
                     <img onClick={() => saveDiff('note-img')} src="assets/img/camera-png.png" />
                     <img onClick={() => saveDiff('note-video')} src="assets/img/video-png.png" />

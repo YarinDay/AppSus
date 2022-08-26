@@ -6,6 +6,12 @@
     background-color: #78a7a7;
 }
 
+.main-appsus-title {
+    text-align: center;
+    margin-bottom: 22px;
+    font-size: 1.5em;
+}
+
 .write-a-note #note-title {
     width: 50%;
     display: block;

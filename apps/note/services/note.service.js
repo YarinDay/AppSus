@@ -3,13 +3,13 @@ import { storageService } from "../services/storageService.js"
 
 export const noteService = {
     getNotes,
-    addNoteToNotes,
     makeId,
     query,
     saveNote,
-    getFixedTodos,
     removeNote,
     copyNote,
+    changeBgc,
+    changeNotePinStatus,
 }
 const KEY = 'notesDB'
 
@@ -20,14 +20,16 @@ function query(note) {
         notes = getNotes()
         _saveToStorage(notes)
     }
-    // notes.push(note)
     return Promise.resolve(notes)
 }
 
 function saveNote(note) {
     note.id = makeId()
     note.isPinned = false
+    note.style = {}
+    note.style.backgroundColor = '#78a7a7'
     let notes = _loadFromStorage()
+    if (note.info.todos) note.info.todos = note.info.todos.split(',')
     if (!notes || !notes.length) {
         notes = getNotes()
         _saveToStorage(notes)
@@ -35,10 +37,12 @@ function saveNote(note) {
     }
     notes.unshift(note)
     _saveToStorage(notes)
+    console.log('note :', note)
     return Promise.resolve(notes)
 }
 
 function removeNote(noteId) {
+    console.log('noteId :', noteId)
     let notes = _loadFromStorage()
     let noteIdx = notes.findIndex(note => note.id === noteId)
     notes.splice(noteIdx, 1)
@@ -46,11 +50,40 @@ function removeNote(noteId) {
     return Promise.resolve(notes)
 }
 
+function changeBgc(noteId, bgcColor) {
+    let notes = _loadFromStorage()
+    let noteIdx = notes.findIndex(note => note.id === noteId)
+    notes[noteIdx].style.backgroundColor = bgcColor + ''
+    console.log('notes[noteIdx] :', notes[noteIdx])
+    _saveToStorage(notes)
+    return Promise.resolve(notes)
+}
+
 function copyNote(note) {
-    console.log('Note :', note)
     let notes = _loadFromStorage()
     const newNote = _createCopyNote(note)
     notes.unshift(newNote)
+    _saveToStorage(notes)
+    return Promise.resolve(notes)
+}
+
+function changeNotePinStatus(noteId) {
+    let notes = _loadFromStorage()
+    let noteIdx = notes.findIndex(note => note.id === noteId)
+    let note = notes[noteIdx]
+    note.lastNoteIdx = noteIdx
+    note.isPinned = !note.isPinned
+
+    // if(!notes.includes(note)) {
+    if (note.isPinned) {
+        let kaki = notes.splice(noteIdx, 1)
+        notes.unshift(kaki[0])
+    }
+    else if (!note.isPinned) {
+        let kaki = notes.splice(noteIdx, 1)
+        notes.push(kaki[0])
+    }
+    // }
     _saveToStorage(notes)
     return Promise.resolve(notes)
 }
@@ -66,24 +99,25 @@ function _createCopyNote(note) {
             link: note.info.link,
             todos: note.info.todos
         },
+        style: {
+            backgroundColor: note.style.backgroundColor
+        }
     }
     return newNote
 }
-
-function getFixedTodos(todos) {
-    // console.log('todos :', todos)
-}
-
 
 function getNotes() {
     let notes = [
         {
             id: "n101",
             type: "note-txt",
-            isPinned: true,
+            isPinned: false,
             info: {
-                title: "Fullstack Me Baby!",
-                txt: "I just typeBullshit right here..."
+                title: "I am nobody...",
+                text: "Nobody is perfect. I am perfect."
+            },
+            style: {
+                backgroundColor: "#78a7a7"
             }
         },
         {
@@ -91,36 +125,54 @@ function getNotes() {
             type: "note-img",
             isPinned: false,
             info: {
-                url: "../../assets/img/random-dog.jfif",
-                title: "Bobi and Me"
+                url: "https://i.chzbgr.com/full/9604474880/h5D16816F/dog",
+                title: "That's Bobi"
             },
             style: {
-                backgroundColor: "#00d"
+                backgroundColor: "#78a7a7"
             }
         },
         {
             id: "n103",
-            type: "note-todos",
+            type: "note-txt",
             isPinned: false,
             info: {
-                title: "Get my stuff together",
-                todos: [
-                    { txt: "Driving liscence", doneAt: null },
-                    { txt: "Coding power", doneAt: 187111111 }
-                ]
+                title: "I wouldn't exactly say I'm lazy, ",
+                text: " but it's a good thing that breathing is a reflex."
+            },
+            style: {
+                backgroundColor: "#78a7a7"
             }
         },
         {
             id: "n104",
-            type: "note-video",
-            isPinned: true,
+            type: "note-todos",
+            isPinned: false,
             info: {
-                title: "Go-Pro Awards",
-                link: 'http://www.youtube.com/embed/watch?v=3bRgp_GSyBQ'
+                title: "Finish This!!!!!",
+                todos: [
+                    "Driving liscence" ,
+                    "Coding power" 
+                ]
+            },
+            style: {
+                backgroundColor: "#78a7a7"
             }
         },
         {
             id: "n105",
+            type: "note-video",
+            isPinned: false,
+            info: {
+                title: "Go-Pro Awards",
+                link: 'http://www.youtube.com/embed/watch?v=3bRgp_GSyBQ'
+            },
+            style: {
+                backgroundColor: "#78a7a7"
+            }
+        },
+        {
+            id: "n106",
             type: "note-img",
             isPinned: false,
             info: {
@@ -128,16 +180,19 @@ function getNotes() {
                 title: "Shreki <3"
             },
             style: {
-                backgroundColor: "#00d"
+                backgroundColor: "#78a7a7"
             }
         },
         {
-            id: "n106",
+            id: "n107",
             type: "note-video",
             isPinned: false,
             info: {
                 label: "BMX Extreme Video",
                 link: 'http://www.youtube.com/embed/watch?v=13OtZFWdhwQ'
+            },
+            style: {
+                backgroundColor: "#78a7a7"
             }
         }
     ]
@@ -155,16 +210,6 @@ function makeId(length = 6) {
     return txt
 }
 
-
-function addNoteToNotes(note) {
-    // let notes = getNotes()
-    //     .then(notes => {
-    //         notes = [note, ...notes]
-    //         _saveToStorage(note)
-    //         return Promise.resolve(note)
-    //     })
-}
-
 function _saveToStorage(note) {
     storageService.saveToStorage(KEY, note)
 }
@@ -172,8 +217,3 @@ function _saveToStorage(note) {
 function _loadFromStorage() {
     return storageService.loadFromStorage(KEY)
 }
-
-
-
-
-

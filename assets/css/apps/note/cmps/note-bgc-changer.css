@@ -1,0 +1,57 @@
+.note-bgc-changer {
+    display: inline;
+}
+
+.change-color-container {
+    display: flex;
+    top: 30px;
+    right: 212px;
+    position: relative;
+    width: 200px;
+    justify-content: space-evenly;
+    z-index: 1;
+}
+
+.change-color-container>* {
+    width: 30px;
+    height: 30px;
+    margin-left: 3px;
+    border-radius: 50%;
+}
+
+.change-color-container .bgc-default {
+    background-color: #78a7a7;
+}
+
+.change-color-container .bgc-red {
+    background-color: #954242;
+}
+
+.change-color-container .bgc-green {
+    background-color: #41a43f;
+}
+
+.change-color-container .bgc-blue {
+    background-color: #3046a8;
+}
+
+
+.change-color-container .bgc-white {
+    background-color: #cbd3cb;
+}
+
+.change-color-container .bgc-purple {
+    background-color: #8542aa;
+}
+
+.change-color-container .bgc-pink {
+    background-color: #bf2bc7;
+}
+
+.change-color-container .bgc-yellow {
+    background-color: #cece35;
+}
+
+.change-color-container .bgc-aqua {
+    background-color: r#4bceb3;
+}

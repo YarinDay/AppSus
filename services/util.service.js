@@ -50,13 +50,14 @@ function getRandomColor() {
 
 function getDayName(date, locale) {
     date = new Date(date)
-    return date.toLocaleDateString(locale, { weekday: 'long' })
+    return date.toLocaleDateString(locale, { weekday: 'short' })
 }
 
 
 function getMonthName(date) {
-    const monthNames = ["January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"
+    date = new Date(date)
+    const monthNames = ["Jan", "Feb", "March", "April", "May", "June",
+        "July", "Aug", "Sep", "Oct", "Nov", "Dec"
     ]
     return monthNames[date.getMonth()]
 }

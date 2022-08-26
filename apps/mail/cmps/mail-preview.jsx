@@ -1,3 +1,4 @@
+import { utilService } from "../../../services/util.service.js"
 import { mailService } from "../services/mail.service.js"
 // const { Link } = ReactRouterDOM
 
@@ -14,15 +15,17 @@ export class MailPreview extends React.Component {
     render() {
         const { mail, onReadMail, onRemoveMail, onStarMail } = this.props
         const { isOpen } = this.state
-        const mailDateInHours = new Date(mail.sentAt).toLocaleTimeString('en-US')
-        const mailDateInDays = new Date(mail.sentAt).toLocaleDateString('en-US')
+        // const mailDateInHours = new Date(mail.sentAt).toLocaleTimeString('en-US')
+        const mailDateInHours = `${new Date(mail.sentAt).getHours()}:${utilService.padNum(new Date(mail.sentAt).getMinutes())}`
+        const mailDateInDays = `${new Date(mail.sentAt).getDate()} ${utilService.getMonthName(mail.sentAt)} `
         const user = mailService.loggedInUser()
         let isMailOpen = isOpen ? "mail-preview openned" : "mail-preview"
         let isMailRead = mail.isRead ? "mail-read" : ""
         return <React.Fragment>
             <div className={isMailRead}>
                 <article onClick={() => { this.onIsOpen(), onReadMail(mail.id) }} className={isMailOpen}>
-                    <span className="mail-subject">{mail.subject}</span>
+                    <span className="mail-fullname">{mail.fullname}</span>
+                    <span className="mail-subject">{mail.subject} -</span>
                     <span className="mail-body">{mail.body}</span>
                     {mail.sentAt && <span className="mail-date">
                         {((Date.now() - mail.sentAt) > (1000 * 60 * 60 * 24)) ? mailDateInDays : mailDateInHours}

@@ -19,9 +19,6 @@ export class MailIndex extends React.Component {
 
     componentDidUpdate(prevProps, prevState) {
         this.showUnreadMails()
-        console.log('draftMails:', this.state.draftMails);
-        // console.log(prevState);
-        // console.log('this state', this.state);
 
     }
 
@@ -34,7 +31,6 @@ export class MailIndex extends React.Component {
         this.setState({ filterBy }, () => {
             this.loadMails()
         })
-        console.log(this.state.mails);
     }
 
     onSetFilterByMenu = (folder) => {
@@ -45,20 +41,17 @@ export class MailIndex extends React.Component {
 
     onReadMail = (mailId) => {
         mailService.markAsRead(mailId)
-        console.log(this.state.mails);
         this.loadMails()
     }
 
     onRemoveMail = (mailId, ev) => {
         ev.stopPropagation();
-        console.log('Removed!', mailId);
         mailService.sendToTrash(mailId)
         this.loadMails()
     }
 
     onStarMail = (mailId, ev) => {
         ev.stopPropagation();
-        console.log('Starred!', mailId);
         mailService.toggleStarMail(mailId)
         this.loadMails()
     }
@@ -68,7 +61,7 @@ export class MailIndex extends React.Component {
     }
 
     onAddMail = (mail) => {
-        if (mail.body === '') mail.body = 'No Body Msg'
+        if (mail.body === '') mail.body = 'No body Msg'
         if (mail.subject === '') mail.subject = 'No subject Msg'
         mailService.addNewMail(mail)
         this.loadMails()
@@ -80,7 +73,7 @@ export class MailIndex extends React.Component {
         this.setState(prevState => ({
             draftMails: [...prevState.draftMails, mail]
         }))
-        if (mail.body === '') mail.body = 'No Body Msg'
+        if (mail.body === '') mail.body = 'No body Msg'
         if (mail.subject === '') mail.subject = 'No subject Msg'
         mailService.addDraftMail(mail)
         this.loadMails() // maybe not necessary
@@ -92,15 +85,15 @@ export class MailIndex extends React.Component {
     }
 
     render() {
-        const { mails, newMail } = this.state
+        const { mails, newMail, folder } = this.state
         return <section className="mail-index">
             <div className="menu-logos">
-                <div onClick={this.toggleNewMail}><img className="write-new-mail-logo filter-logo" src="assets/img/write-new-mail.png" /></div>
-                <div onClick={() => this.onSetFilterByMenu('inbox')} className="inbox-filter-container"><img className="inbox-logo filter-logo" src="assets/img/inbox.png" /><span className="unread-mails-count">{this.showUnreadMails()}</span></div>
-                <div onClick={() => this.onSetFilterByMenu('stared')}><img className="star-logo filter-logo" src="assets/img/star-logo.png" /></div>
-                <div onClick={() => this.onSetFilterByMenu('draft')}><img className="new-mail-logo filter-logo" src="assets/img/new-mail-logo.png" /></div>
-                <div onClick={() => this.onSetFilterByMenu('trash')} ><img className="trash-mail-logo filter-logo" src="assets/img/trash-mails-icon.png" /></div>
-                <div onClick={() => this.onSetFilterByMenu('sent')}><img className="sent-logo filter-logo" src="assets/img/sent-logo.png" /></div>
+                <div className="filter-logo-container" onClick={this.toggleNewMail}><img className="write-new-mail-logo filter-logo" src="assets/img/write-new-mail.png" /> New mail</div>
+                <div className={folder === 'inbox' ? "filter-logo-container inbox-filter-container clicked" : "filter-logo-container inbox-filter-container"} onClick={() => this.onSetFilterByMenu('inbox')}><img className="inbox-logo filter-logo" src={folder === 'inbox' ? "assets/img/inbox-clicked.png":"assets/img/inbox.png"} />Inbox<span className="unread-mails-count">{this.showUnreadMails()}</span></div>
+                <div className={folder === 'stared' ? "filter-logo-container clicked" : "filter-logo-container"} onClick={() => this.onSetFilterByMenu('stared')}><img className="star-logo filter-logo" src={folder === 'stared' ? "assets/img/stared-mail-icon.png" : "assets/img/star-logo.png"} />Favorites</div>
+                <div className={folder === 'draft' ? "filter-logo-container clicked" : "filter-logo-container"} onClick={() => this.onSetFilterByMenu('draft')}><img className="new-mail-logo filter-logo" src={folder === 'draft'? "assets/img/new-mail-clicked.png":"assets/img/new-mail-logo.png"} />Drafts</div>
+                <div className={folder === 'trash' ? "filter-logo-container clicked" : "filter-logo-container"} onClick={() => this.onSetFilterByMenu('trash')}><img className="trash-mail-logo filter-logo" src={folder === 'trash'? "assets/img/trash-clicked.png": "assets/img/trash-mails-icon.png"}/>Trash</div>
+                <div className={folder === 'sent' ? "filter-logo-container clicked" : "filter-logo-container"} onClick={() => this.onSetFilterByMenu('sent')}><img className="sent-logo filter-logo" src={folder === 'sent' ? "assets/img/sent-clicked-logo.png" : "assets/img/sent-logo.png"} />Sent mails</div>
             </div>
             <div className="mail-main-content">
                 <MailFilter onSetFilter={this.onSetFilter} />

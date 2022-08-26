@@ -27,7 +27,6 @@ export class MailCompose extends React.Component {
         const { newMail } = this.state
         if (!newMail.sentAt && newMail.to !== '') {
             this.props.onAddDraftMail(newMail)
-            console.log('draft died!');
         }
         clearInterval(this.intervalId)
     }

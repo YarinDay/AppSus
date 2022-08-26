@@ -1,7 +1,6 @@
 import { MailPreview } from "./mail-preview.jsx"
 
 export function MailList({ mails, onReadMail, onRemoveMail, onStarMail }) {
-    // console.log('mails from mails list', mails)
 
     return <section className="mail-list">
 

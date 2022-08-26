@@ -2,16 +2,14 @@ export class MailFilter extends React.Component {
 
     state = {
         filterBy: {
-            subject: ''
+            subject: '',
+            readMails: ''
         }
     }
 
     handleChange = ({ target }) => {
         const field = target.name
         const value = target.type === 'number' ? +target.value : target.value
-        console.log(field);
-        console.log(value);
-        console.log(this.props);
         this.setState((prevState) => ({
             filterBy: {
                 ...prevState.filterBy,
@@ -28,10 +26,9 @@ export class MailFilter extends React.Component {
     }
 
     render() {
-        const { subject } = this.state.filterBy
+        const { subject, readMails } = this.state.filterBy
         return <section className="mail-filter">
             <form onSubmit={this.onFilter}>
-                <label htmlFor="by-subject"></label>
                 <input
                     type="text"
                     placeholder="Search mail"
@@ -40,6 +37,11 @@ export class MailFilter extends React.Component {
                     value={subject}
                     onChange={this.handleChange}
                 />
+                <select id="read-mails" name="readMails" onChange={this.handleChange}>
+                    <option value="">Select All</option>
+                    <option value="read">Read</option>
+                    <option value="unread">Unread</option>
+                </select>
                 <button hidden>Filter!</button>
             </form>
         </section>

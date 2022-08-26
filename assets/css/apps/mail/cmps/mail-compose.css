@@ -16,7 +16,7 @@
 }
 
 .mail-compose-header {
-    background-color: #f2f6fc;
+    background-color: var(--clr8);
 }
 
 .mail-compose-form {

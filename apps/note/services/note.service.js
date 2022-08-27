@@ -71,7 +71,6 @@ function changeNotePinStatus(noteId) {
     note.lastNoteIdx = noteIdx
     note.isPinned = !note.isPinned
 
-    // if(!notes.includes(note)) {
     if (note.isPinned) {
         let kaki = notes.splice(noteIdx, 1)
         notes.unshift(kaki[0])
@@ -80,7 +79,7 @@ function changeNotePinStatus(noteId) {
         let kaki = notes.splice(noteIdx, 1)
         notes.push(kaki[0])
     }
-    // }
+
     _saveToStorage(notes)
     return Promise.resolve(notes)
 }
@@ -134,17 +133,6 @@ function getNotes() {
             type: "note-img",
             isPinned: false,
             info: {
-                imgUrl: "https://static1.srcdn.com/wordpress/wp-content/uploads/2019/11/Jerry-Rick-Morty-Featured-Social-1710x900.jpg?q=50&fit=contain&w=943&h=&dpr=1.5"
-            },
-            style: {
-                backgroundColor: "#4f5d5d"
-            }
-        },
-        {
-            id: makeId(),
-            type: "note-img",
-            isPinned: false,
-            info: {
                 imgUrl: "https://media2.giphy.com/media/cL4pqu8GGRIihabgSM/giphy.gif?cid=ecf05e47xfziqfnp397in22l4mggmqmwlje2no7l38kbgsj1&rid=giphy.gif&ct=g"
             },
             style: {
@@ -172,11 +160,23 @@ function getNotes() {
                 todos: [
                     "Sleep more than 2 hours ",
                     "Finish Coding Academy tasks on time",
-                    "Don't afraid when Yaron is yelling at you!"
+                    "Keep up with the good work!",
+                    "Buy milk..."
                 ]
             },
             style: {
                 backgroundColor: "#3046a8"
+            }
+        },
+        {
+            id: makeId(),
+            type: "note-img",
+            isPinned: false,
+            info: {
+                imgUrl: "https://static1.srcdn.com/wordpress/wp-content/uploads/2019/11/Jerry-Rick-Morty-Featured-Social-1710x900.jpg?q=50&fit=contain&w=943&h=&dpr=1.5"
+            },
+            style: {
+                backgroundColor: "#4f5d5d"
             }
         },
         {
@@ -213,7 +213,6 @@ function makeId(length = 6) {
     for (var i = 0; i < length; i++) {
         txt += possible.charAt(Math.floor(Math.random() * possible.length))
     }
-
     return txt
 }
 

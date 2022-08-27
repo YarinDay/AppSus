@@ -1,5 +1,5 @@
 :root {
-    /* color pallete */
+    /* color pallette Mail */
     --clr1: #626262;
     --clr2: #000;
     --clr3: #c2c2c2;
@@ -9,8 +9,18 @@
     --clr7: #a5f1ff;
     --clr8: #f2f6fc;
     --clr9: #cadfff;
+    
+    /* Color Pallette */
+    --clr01: #4f5d5d;
+    --clr02: #202124d6;
+    
+    --clr03: #c2c2c2;
+    --clr04: #f0f0f0;
+    --clr05: #818181;
+    --clr06: #1d1d1d;
+
         /* layout variables */
-        --outer-layout-padding: 20px;
+    --outer-layout-padding: 20px;
     --inner-layout-padding: 20px;
 
     /* mq variables */

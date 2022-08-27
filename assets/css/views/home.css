@@ -1,0 +1,57 @@
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    background: #4f5d5d;
+    color: black;
+    font-weight: bold;
+    box-shadow: -1px 0px 7px 5px #8e7c7c;
+    border-bottom: 2px solid #5f5454;
+}
+
+nav a {
+    margin: .5em;
+}
+
+nav a:active {
+    color: rgb(53, 45, 53);
+}
+
+nav a.active {
+    color: rgb(42, 42, 49);
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.main-logo {
+    width: 45px;
+    height: 30px;
+    margin-left: 10px;
+}
+
+.text-logo {
+    color: black;
+    display: inline-block;
+    font-size: 2rem;
+    font-family: robotoSlab;
+}
+
+@media (max-width: 355px) {
+    .header-nav {
+        display: block
+    }
+    .text-logo {
+        font-size: 1.5rem;
+    }
+    .main-logo {
+        width: 25px;
+        height: 25px;
+    }
+}
+
+@media (min-width: 356px) {
+    .header-nav {
+        display: inline;
+    }
+}

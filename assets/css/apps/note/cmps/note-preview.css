@@ -4,7 +4,6 @@
     justify-content: space-around;
     color: black;
     font-weight: bold;
-    /* grid-template-columns: repeat(auto-fit, minmax(225px, 1fr)); */
     width: 300px;
     height: 260px;
     margin-top: 10px;

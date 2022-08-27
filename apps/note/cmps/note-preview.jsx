@@ -1,5 +1,4 @@
 import { NoteToolBar } from "./note-tool-bar.jsx"
-import { noteService } from "../services/note.service.js"
 
 export class NotePreview extends React.Component {
 
@@ -68,14 +67,11 @@ export function GifBox({ note }) {
 export function VideoBox({ note }) {
     return <section style={{ backgroundColor: note.style.backgroundColor }} className="video-box-container box-container">
         <span className="note-title">{note.info.title}</span>
-        <iframe src={note.info.link} width="100%" height="95%"></iframe>
+        <iframe  type="video/mp4" src={note.info.link} width="100%" height="95%"></iframe>
     </section>
 }
 
 export class TodosBox extends React.Component {
-
-
-
 
     render() {
         const { note } = this.props

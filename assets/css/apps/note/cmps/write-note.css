@@ -4,7 +4,7 @@
     border-radius: 25px;
     margin: auto;
     margin-bottom: 20px;
-    background-color: #4f5d5d;
+    background-color: var(--clr01);
 }
 
 .main-appsus-title {
@@ -33,7 +33,7 @@
     display: block;
     border-radius: 10px;
     font-weight: bold;
-    background-color: #4f5d5d;
+    background-color: var(--clr01);
     margin: auto;
 }
 
@@ -67,17 +67,15 @@
     height: 65px;
     max-height: 40px;
     max-width: 300px;
-    /* resize: none; */
 }
 
 @media (max-width: 450px) {
     .write-a-note {
         width: 330px;
-        height: 150px;
+        height: 190px;
         border-radius: 25px;
         margin-bottom: 20px;
-        /* margin: auto; */
-        background-color: #4f5d5d;
+        background-color: var(--clr01);
     }
 
     .input-btns {
@@ -92,10 +90,11 @@
 @media (max-width: 350px) {
     .write-a-note {
         width: 230px;
-        height: 150px;
+        height: 250px;
+        text-align: center;
         border-radius: 25px;
         margin-bottom: 30px;
-        background-color: #4f5d5d;
+        background-color: var(--clr01);
     }
 
     .input-btns {
@@ -104,5 +103,9 @@
         margin-right: 0px;
         margin-bottom: 10px;
         gap: 22px;
+    }
+
+    #note-text-area {
+        max-width:170px ;
     }
 }

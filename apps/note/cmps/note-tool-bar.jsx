@@ -1,6 +1,4 @@
-import { noteService } from "../services/note.service.js"
 import { NoteBgcChanger } from "./note-bgc-change.jsx"
-
 
 export class NoteToolBar extends React.Component {
 
@@ -22,8 +20,7 @@ export class NoteToolBar extends React.Component {
         const { note, changeNoteBgc } = this.props
         let isPin = (note.isPinned) ? 'black' : 'white'
 
-        return <section style={{backgroundColor: note.style.backgroundColor}} className="tool-bar-container">
-            <img src="assets/img/forward-png.png" />
+        return <section style={{ backgroundColor: note.style.backgroundColor }} className="tool-bar-container">
             <img onClick={this.props.onRemoveNote} src="assets/img/trash-png.png" />
             <img onClick={this.props.onCopyNote} src="assets/img/copy-note-png.png" />
             <img onClick={this.onChangeBgc} src="assets/img/change-bgc-png.png" />

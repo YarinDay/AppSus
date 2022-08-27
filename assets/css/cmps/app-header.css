@@ -1,11 +1,15 @@
-
 .app-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px 0;
-    background: rgb(120, 167, 167);
-    border-bottom: 2px solid white;
+    background: #4f5d5d;
+    /* border-bottom: 2px solid white; */
+    /* background: rgb(120, 167, 167); */
+    color: black;
+    font-weight: bold;
+    box-shadow: -1px 0px 7px 5px #8e7c7c;
+    border-bottom: 2px solid #5f5454;
 }
 
 nav a {
@@ -33,4 +37,8 @@ nav a.active {
     display: inline-block;
     font-size: 2rem;
     font-family: robotoSlab;
+}
+
+@media (max-with: 450px) {
+    /* ! Need to finish this (Make Hamburger menu, fix the bgc of the website) */
 }

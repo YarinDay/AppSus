@@ -1,0 +1,69 @@
+.note-bgc-changer {
+    /* display: inline; */
+    width: 0;
+    height: 0;
+}
+
+.change-color-container {
+    display: flex;
+    top: 30px;
+    right: 212px;
+    background-color: #363f3fbf;
+    position: relative;
+    width: 170px;
+    flex-wrap: wrap;
+    z-index: 1;
+}
+
+.change-color-container>* {
+    width: 30px;
+    height: 30px;
+    margin-left: 3px;
+    border-radius: 50%;
+}
+
+.change-color-container .bgc-default {
+    background-color: #4f5d5d;
+}
+
+.change-color-container .bgc-red {
+    background-color: #954242;
+}
+
+.change-color-container .bgc-green {
+    background-color: #41a43f;
+}
+
+.change-color-container .bgc-blue {
+    background-color: #3046a8;
+}
+
+
+.change-color-container .bgc-white {
+    background-color: #cbd3cb;
+}
+
+.change-color-container .bgc-purple {
+    background-color: #8542aa;
+}
+
+.change-color-container .bgc-pink {
+    background-color: #bf2bc7;
+}
+
+.change-color-container .bgc-yellow {
+    background-color: #cece35;
+}
+
+.change-color-container .bgc-aqua {
+    background-color: #4bceb3;
+}
+
+.change-color-container .bgc-transparent {
+    /* background-color: #202124; */
+}
+
+.change-color-container .bgc-transparent img {
+    width: 30px;
+    height: 30px;
+}

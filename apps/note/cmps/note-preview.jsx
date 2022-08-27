@@ -3,9 +3,14 @@ import { noteService } from "../services/note.service.js"
 
 export class NotePreview extends React.Component {
 
-    onRemoveNote= () => {
+    onRemoveNote = () => {
         const { note } = this.props
         this.props.onRemoveNote(note.id)
+    }
+
+    onCopyNote = () => {
+        const { note } = this.props
+        this.props.onCopyNote(note)
     }
 
     DynamicCmp = () => {
@@ -19,70 +24,73 @@ export class NotePreview extends React.Component {
                 return <VideoBox note={note} />
             case 'note-todos':
                 return <TodosBox note={note} />
+            case 'note-gif':
+                return <GifBox note={note} />
         }
     }
 
-    onCopyNote= (notes) => {
-        this.props.onCopyNote(notes)
-    }
-
     render() {
-        const { note, onRemoveNote } = this.props
+        const { note, changeNoteBgc, onClickedPin } = this.props
         return <section className="note-preview">
             {this.DynamicCmp(note)}
-            <NoteToolBar onCopyNote={this.onCopyNote} onRemoveNote={this.onRemoveNote} note={note}/>
+            <NoteToolBar
+                onCopyNote={this.onCopyNote}
+                onRemoveNote={this.onRemoveNote}
+                changeNoteBgc={changeNoteBgc}
+                note={note}
+                onClickedPin={onClickedPin}
+            />
         </section>
     }
 }
 
 export function TextBox({ note }) {
-    let isPin = (note.isPinned) ? 'black' : 'white'
-
-    return <section className="text-box-container box-container">
-        <span className="pin-btn">
-            <img src={`assets/img/${isPin}-pin.png`} />
-        </span>
+    return <section style={{ backgroundColor: note.style.backgroundColor }} className="text-box-container box-container" >
         <span className="note-title">{note.info.title}</span>
         <span className="note-text">{note.info.text}</span>
-    </section>
+    </section >
 }
 
 export function ImgBox({ note }) {
-    let isPin = (note.isPinned) ? 'black' : 'white'
+    return <section style={{ backgroundColor: note.style.backgroundColor, backgroundImage: `url(note.info.url)` }} className="image-box-container box-container">
+        <div className="img-container"><img src={note.info.imgUrl} /></div>
+        <span className="note-title note-title-img">{note.info.title}</span>
+    </section>
+}
 
-    return <section className="image-box-container box-container">
-        <span className="pin-btn">
-            <img src={`assets/img/${isPin}-pin.png`} />
-        </span>
-        <span className="note-title">{note.info.title}</span>
-        <div className="img-container"><img src={note.info.url} /></div>
+export function GifBox({ note }) {
+    return <section style={{ backgroundColor: note.style.backgroundColor, backgroundImage: `url(note.info.url)` }} className="image-box-container box-container">
+        <div className="gif-container"><img src={note.info.gifUrl} /></div>
+        <span className="note-title note-title-img">{note.info.title}</span>
     </section>
 }
 
 export function VideoBox({ note }) {
-    let isPin = (note.isPinned) ? 'black' : 'white'
-
-    return <section className="video-box-container box-container">
-        <span className="pin-btn">
-            <img src={`assets/img/${isPin}-pin.png`} />
-        </span>
+    return <section style={{ backgroundColor: note.style.backgroundColor }} className="video-box-container box-container">
         <span className="note-title">{note.info.title}</span>
         <iframe src={note.info.link} width="100%" height="95%"></iframe>
     </section>
 }
 
-export function TodosBox({ note }) {
-    let isPin = (note.isPinned) ? 'black' : 'white'
+export class TodosBox extends React.Component {
 
-    if(!note.info.todos) return <div>No Todos For Now...</div>
-    return <section className="todos-box-container box-container">
-        <span className="pin-btn">
-            <img src={`assets/img/${isPin}-pin.png`} />
-        </span>
-        <span className="note-title">{note.info.title}</span>
-        <ul>
-            {noteService.getFixedTodos(note.info.todos)}
-            {/* {note.info.todos.map(todo => <li key={noteService.makeId()}>{todo.txt} Done At: {todo.doneAt}</li>)} */}
-        </ul>
-    </section>
+
+
+
+    render() {
+        const { note } = this.props
+        if (!note.info.todos) return <div>No Todos For Now...</div>
+
+        return <section style={{ backgroundColor: note.style.backgroundColor }} className="todos-box-container box-container">
+            <span className="note-title">{note.info.title}</span>
+            <ul>
+                {/* {note.info.todos.map(todo => {
+                    <input type="checkbox" name={note.id} id={note.id}>
+                        <label value={todo} htmlFor={note.id}> {todo}</label>
+                    </input>
+                })} */}
+                {note.info.todos.map(todo => <li className="each-todo" key={note.id}>{todo}</li>)}
+            </ul>
+        </section>
+    }
 }

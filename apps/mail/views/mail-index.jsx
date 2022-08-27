@@ -2,7 +2,7 @@ import { MailCompose } from "../cmps/mail-compose.jsx"
 import { MailFilter } from "../cmps/mail-filter.jsx"
 import { MailList } from "../cmps/mail-list.jsx"
 import { mailService } from "../services/mail.service.js"
-import {MailSort} from "../cmps/mail-sorting.jsx"
+import { MailSort } from "../cmps/mail-sorting.jsx"
 
 export class MailIndex extends React.Component {
 
@@ -112,6 +112,8 @@ export class MailIndex extends React.Component {
 
     onSort = (sortBy) => {
         console.log(sortBy)
+        mailService.sortMails(sortBy)
+        this.loadMails()
     }
 
     render() {
@@ -127,9 +129,11 @@ export class MailIndex extends React.Component {
                 <div className={folder === 'sent' ? "filter-logo-container clicked" : "filter-logo-container"} onClick={() => this.onSetFilterByMenu('sent')}><img className="sent-logo filter-logo" src={folder === 'sent' ? "assets/img/sent-clicked-logo.png" : "assets/img/sent-logo.png"} />Sent mails</div>
             </div>
             <div className="mail-main-content">
-                <MailFilter onSetFilter={this.onSetFilter} />
+                <div className="mail-main-content-filtering">
+                    <MailFilter onSetFilter={this.onSetFilter} />
+                    <MailSort onSort={this.onSort} />
+                </div>
                 <MailList mails={mails} folder={folder} onEditMail={this.onEditMail} onRemoveMail={this.onRemoveMail} onStarMail={this.onStarMail} onReadMail={this.onReadMail} newMail={newMail} />
-                <MailSort onSort={this.onSort} />
                 {newMail && <MailCompose editMail={editMail} onAddMail={this.onAddMail} onAddDraftMail={this.onAddDraftMail} onCloseMail={() => this.setState({ newMail: false })
                 } />}
             </div>

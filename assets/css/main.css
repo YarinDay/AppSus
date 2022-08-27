@@ -20,6 +20,7 @@
 
 
 /* MAIL */
+@import './apps/mail/cmps/mail-sorting.css';
 @import './apps/mail/cmps/mail-compose.css';
 @import './apps/mail/cmps/mail-preview.css';
 @import './apps/mail/cmps/mail-list.css';

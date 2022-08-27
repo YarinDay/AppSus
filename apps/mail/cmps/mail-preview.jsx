@@ -13,12 +13,23 @@ export class MailPreview extends React.Component {
         this.setState({ isOpen: !this.state.isOpen })
     }
 
+    renderDate = () => {
+        const { sentAt } = this.props.mail
+        const DAY_IN_MILLISECOND = 1000 * 60 * 60 * 24
+        const YEAR_IN_MILLISECOND = DAY_IN_MILLISECOND * 365
+        const mailDateInHours = `${new Date(sentAt).getHours()}:${utilService.padNum(new Date(sentAt).getMinutes())}`
+        const mailDateInDays = `${new Date(sentAt).getDate()} ${utilService.getMonthName(sentAt)} `
+        const mailDateWithYear = `${new Date(sentAt).toLocaleDateString()} `
+        if ((Date.now() - sentAt) < (DAY_IN_MILLISECOND)) return mailDateInHours
+        if ((Date.now() - sentAt) < (YEAR_IN_MILLISECOND)) return mailDateInDays
+        return mailDateWithYear
+    }
+
     render() {
         const { mail, onReadMail, onRemoveMail, onStarMail, onEditMail, folder } = this.props
         const { isOpen } = this.state
         // const mailDateInHours = new Date(mail.sentAt).toLocaleTimeString('en-US')
-        const mailDateInHours = `${new Date(mail.sentAt).getHours()}:${utilService.padNum(new Date(mail.sentAt).getMinutes())}`
-        const mailDateInDays = `${new Date(mail.sentAt).getDate()} ${utilService.getMonthName(mail.sentAt)} `
+
         const user = mailService.loggedInUser()
         let isMailOpen = isOpen ? "mail-preview openned" : "mail-preview"
         let isMailRead = mail.isRead ? "mail-read" : ""
@@ -29,7 +40,7 @@ export class MailPreview extends React.Component {
                     <span className="mail-subject">{mail.subject} -</span>
                     <span className="mail-body">{mail.body}</span>
                     {mail.sentAt && <span className="mail-date">
-                        {((Date.now() - mail.sentAt) > (1000 * 60 * 60 * 24)) ? mailDateInDays : mailDateInHours}
+                        {this.renderDate()}
                     </span>}
                 </article >
             </div>

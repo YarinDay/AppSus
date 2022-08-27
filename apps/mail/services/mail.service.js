@@ -12,7 +12,8 @@ export const mailService = {
     sendToTrash,
     toggleStarMail,
     getUnreadMails,
-    addDraftMail
+    addDraftMail,
+    sortMails
 }
 
 const STORAGE_KEY = 'mailsDB'
@@ -389,6 +390,7 @@ function addNewMail(mail, mailId) {
     mails.push(mail)
     _saveToStorage(mails)
 }
+
 function addDraftMail(mail) {
     const mails = _loadFromStorage()
     const user = loggedInUser()
@@ -430,6 +432,19 @@ function getUnreadMails() {
         if (!mail.isRead && !mail.isSentToTrash && mail.to === loggedinUser.email) unreadMails++
     })
     return unreadMails
+}
+
+function sortMails(sortBy) {
+    const mails = _loadFromStorage()
+    console.log('before sorting', mails)
+    mails.sort((mail1, mail2) => {
+        return sortBy.title === 'ASC' ? mail1.subject.localeCompare(mail2.subject) : mail2.subject.localeCompare(mail1.subject)
+    })
+    mails.sort((mail1, mail2) => {
+        return sortBy.date === 'ASC' ? mail1.sentAt - mail2.sentAt : mail2.sentAt - mail1.sentAt
+    })
+    console.log('after sorting', mails)
+    _saveToStorage(mails)
 }
 
 function loggedInUser() {

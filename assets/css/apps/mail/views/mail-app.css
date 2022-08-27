@@ -8,19 +8,19 @@
     width: 100%;
 }
 
-.unread-mails-count{
+.unread-mails-count {
     font-size: 1.2rem;
     margin-inline-start: auto;
     margin-right: 5px;
 }
 
-.inbox-filter-container{
+.inbox-filter-container {
     display: flex;
     align-items: center;
 }
 
-#by-subject{
-    width: 500px;
+#by-subject {
+    width: 350px;
     background-color: var(--clr8);
     padding: 15px;
     font-size: 1.3rem;
@@ -29,13 +29,16 @@
     border: none;
 }
 
-#read-mails{
+#read-mails {
     border-radius: 10px;
     background-color: var(--clr8);
     border: none;
     padding: 7px;
 }
 
+.mail-main-content-filtering {
+    display: flex;
+}
 
 @media (max-width: 1050px) {
     .mail-subject {
@@ -47,9 +50,15 @@
     }
 }
 
+@media (max-width: 940px) {
+    .mail-sorting {
+        flex-direction: column;
+    }
+}
+
 @media (max-width: 800px) {
     #by-subject {
-        width: 250px;
+        width: 200px;
         padding: 7px;
         font-size: 1rem;
     }
@@ -76,7 +85,7 @@
         width: 100%;
         transform: translateY(-120%);
         transition: transform .7s;
-        
+
     }
 
     .menu-opened {

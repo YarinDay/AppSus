@@ -2,13 +2,14 @@ import { MailCompose } from "../cmps/mail-compose.jsx"
 import { MailFilter } from "../cmps/mail-filter.jsx"
 import { MailList } from "../cmps/mail-list.jsx"
 import { mailService } from "../services/mail.service.js"
-
+import {MailSort} from "../cmps/mail-sorting.jsx"
 
 export class MailIndex extends React.Component {
-    
+
     state = {
         mails: [],
         filterBy: null,
+        sortBy: null,
         folder: 'inbox',
         newMail: false,
         draftMails: [],
@@ -109,6 +110,10 @@ export class MailIndex extends React.Component {
         this.setState({ openMenu: !this.state.openMenu })
     }
 
+    onSort = (sortBy) => {
+        console.log(sortBy)
+    }
+
     render() {
         const { mails, newMail, folder, editMail, openMenu } = this.state
         return <section className="mail-index">
@@ -124,7 +129,9 @@ export class MailIndex extends React.Component {
             <div className="mail-main-content">
                 <MailFilter onSetFilter={this.onSetFilter} />
                 <MailList mails={mails} folder={folder} onEditMail={this.onEditMail} onRemoveMail={this.onRemoveMail} onStarMail={this.onStarMail} onReadMail={this.onReadMail} newMail={newMail} />
-                {newMail && <MailCompose editMail={editMail} onAddMail={this.onAddMail} onAddDraftMail={this.onAddDraftMail} />}
+                <MailSort onSort={this.onSort} />
+                {newMail && <MailCompose editMail={editMail} onAddMail={this.onAddMail} onAddDraftMail={this.onAddDraftMail} onCloseMail={() => this.setState({ newMail: false })
+                } />}
             </div>
         </section>
     }

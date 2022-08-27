@@ -13,6 +13,8 @@
 
 .mail-compose-header {
     background-color: var(--clr8);
+    display: flex;
+    justify-content: space-between;
 }
 
 .mail-compose-form {
@@ -57,6 +59,15 @@
 .new-mail-tools {
     margin-top: auto;
     text-align: right;
+}
+
+button:disabled {
+    cursor:not-allowed;
+    background-color: gray;
+}
+button:disabled:hover {
+    cursor:not-allowed;
+    background-color: #171616;
 }
 
 #to, 

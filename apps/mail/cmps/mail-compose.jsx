@@ -17,7 +17,7 @@ export class MailCompose extends React.Component {
     intervalId = null
 
     componentDidMount() {
-        if(this.props.editMail){
+        if (this.props.editMail) {
             this.setState({ newMail: this.props.editMail }, console.log(this.state.newMail))
         }
         this.intervalId = setInterval(() => {
@@ -31,7 +31,7 @@ export class MailCompose extends React.Component {
             this.props.onAddDraftMail(newMail)
         }
         console.log(newMail);
-        if(newMail.id) console.log(newMail.id);
+        if (newMail.id) console.log(newMail.id);
         clearInterval(this.intervalId)
     }
 
@@ -55,6 +55,7 @@ export class MailCompose extends React.Component {
         if (newMail.to === '') return
         this.props.onAddMail(newMail, ev)
         this.resetMailData()
+        this.props.onCloseMail()
     }
 
     handleChange = ({ target }) => {
@@ -71,8 +72,10 @@ export class MailCompose extends React.Component {
     render() {
         // const { newMail } = this.state
         const { to, subject, body } = this.state.newMail
+        const { onCloseMail } = this.props
+
         return <section className="mail-compose-container">
-            <div className="mail-compose-header">New Message</div>
+            <div className="mail-compose-header">New Message <button onClick={onCloseMail}>x</button></div>
             <form className="mail-compose-form" onSubmit={(ev) => this.onChangeNewMail(ev)}>
                 <label htmlFor="to"></label>
                 <input
@@ -101,7 +104,7 @@ export class MailCompose extends React.Component {
                     value={body}
                     onChange={this.handleChange}
                 ></textarea>
-                <div className="new-mail-tools"><button>Send</button></div>
+                <div className="new-mail-tools"><button disabled={!to}>Send</button></div>
             </form>
         </section>
     }

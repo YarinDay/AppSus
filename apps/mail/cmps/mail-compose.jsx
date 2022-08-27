@@ -1,4 +1,3 @@
-import { utilService } from "../../../services/util.service.js"
 
 
 export class MailCompose extends React.Component {
@@ -18,6 +17,9 @@ export class MailCompose extends React.Component {
     intervalId = null
 
     componentDidMount() {
+        if(this.props.editMail){
+            this.setState({ newMail: this.props.editMail }, console.log(this.state.newMail))
+        }
         this.intervalId = setInterval(() => {
             this.setState({ newMail: this.state.newMail }, console.log(this.state.newMail))
         }, 5000)
@@ -28,6 +30,8 @@ export class MailCompose extends React.Component {
         if (!newMail.sentAt && newMail.to !== '') {
             this.props.onAddDraftMail(newMail)
         }
+        console.log(newMail);
+        if(newMail.id) console.log(newMail.id);
         clearInterval(this.intervalId)
     }
 

@@ -245,18 +245,6 @@ const gMails = [{
     isStared: false
 },
 {
-    id: 'e120',
-    subject: 'No subject Msg',
-    fullname: 'Yarin Dayan',
-    body: 'No body Msg',
-    isRead: false,
-    sentAt: null,
-    to: 'yarindayan11@gmail.com',
-    from: 'yarindayan11@gmail.com',
-    isSentToTrash: false,
-    isStared: false
-},
-{
     id: 'e121',
     subject: 'How to hack to the Pantheon',
     fullname: 'Yarin Dayan',
@@ -345,8 +333,7 @@ function query(filterBy, folder) {
     }
     else if (folder === 'trash') {
         mails = mails.filter(mail => mail.isSentToTrash
-            && mail.to === loggedinUser.email
-            && mail.sentAt)
+            && mail.to === loggedinUser.email)
     }
     else if (folder === 'stared') {
         mails = mails.filter(mail => mail.isStared
@@ -354,7 +341,8 @@ function query(filterBy, folder) {
     }
     else if (folder === 'draft') {
         mails = mails.filter(mail => !mail.sentAt
-            && mail.from === loggedinUser.email)
+            && mail.from === loggedinUser.email
+            && !mail.isSentToTrash)
     }
     else if (folder === 'sent') {
         mails = mails.filter(mail => mail.from === loggedinUser.email
@@ -368,7 +356,7 @@ function query(filterBy, folder) {
             mails = mails.filter(mail => (
                 mail.isRead === true
             ))
-        } else if(readMails === "unread"){
+        } else if (readMails === "unread") {
             mails = mails.filter(mail => (
                 mail.isRead === false
             ))
@@ -387,10 +375,14 @@ function getById(mailId) {
     return Promise.resolve(mail)
 }
 
-function addNewMail(mail) {
+function addNewMail(mail, mailId) {
     const mails = _loadFromStorage()
     const user = loggedInUser()
-    mail.id = utilService.makeId()
+    if (!mail.id) mail.id = utilService.makeId()
+    else {
+        const mailIdx = mails.findIndex(maill => mailId === maill.id)
+        mails.splice(mailIdx, 1)
+    }
     mail.from = user.email
     mail.fullname = user.fullname
     mail.sentAt = Date.now()

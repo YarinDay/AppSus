@@ -10,7 +10,9 @@ export class MailIndex extends React.Component {
         filterBy: null,
         folder: 'inbox',
         newMail: false,
-        draftMails: []
+        draftMails: [],
+        editMail: null,
+        editMailId: null
     }
 
     componentDidMount() {
@@ -58,12 +60,23 @@ export class MailIndex extends React.Component {
 
     toggleNewMail = () => {
         this.setState({ newMail: !this.state.newMail })
+        console.log(this.state.editMail);
+        this.setState({ editMail: null })
     }
 
     onAddMail = (mail) => {
         if (mail.body === '') mail.body = 'No body Msg'
         if (mail.subject === '') mail.subject = 'No subject Msg'
-        mailService.addNewMail(mail)
+        mailService.addNewMail(mail, mail.id)
+        this.loadMails()
+    }
+
+    onEditMail = (mail, ev, mailId) => {
+        ev.preventDefault();
+        // console.log(mail)
+        this.setState({ editMail: mail })
+        this.setState({ newMail: true })
+        this.setState({ editMailId: mailId })
         this.loadMails()
     }
 
@@ -75,7 +88,12 @@ export class MailIndex extends React.Component {
         }))
         if (mail.body === '') mail.body = 'No body Msg'
         if (mail.subject === '') mail.subject = 'No subject Msg'
-        mailService.addDraftMail(mail)
+        if(!mail.id){
+            mailService.addDraftMail(mail)
+        } else{
+            console.log(mail);
+            // mailService.editDraftMail(mail)
+        }
         this.loadMails() // maybe not necessary
     }
 
@@ -85,20 +103,20 @@ export class MailIndex extends React.Component {
     }
 
     render() {
-        const { mails, newMail, folder } = this.state
+        const { mails, newMail, folder, editMail } = this.state
         return <section className="mail-index">
             <div className="menu-logos">
                 <div className="filter-logo-container" onClick={this.toggleNewMail}><img className="write-new-mail-logo filter-logo" src="assets/img/write-new-mail.png" /> New mail</div>
-                <div className={folder === 'inbox' ? "filter-logo-container inbox-filter-container clicked" : "filter-logo-container inbox-filter-container"} onClick={() => this.onSetFilterByMenu('inbox')}><img className="inbox-logo filter-logo" src={folder === 'inbox' ? "assets/img/inbox-clicked.png":"assets/img/inbox.png"} />Inbox<span className="unread-mails-count">{this.showUnreadMails()}</span></div>
+                <div className={folder === 'inbox' ? "filter-logo-container inbox-filter-container clicked" : "filter-logo-container inbox-filter-container"} onClick={() => this.onSetFilterByMenu('inbox')}><img className="inbox-logo filter-logo" src={folder === 'inbox' ? "assets/img/inbox-clicked.png" : "assets/img/inbox.png"} />Inbox<span className="unread-mails-count">{this.showUnreadMails()}</span></div>
                 <div className={folder === 'stared' ? "filter-logo-container clicked" : "filter-logo-container"} onClick={() => this.onSetFilterByMenu('stared')}><img className="star-logo filter-logo" src={folder === 'stared' ? "assets/img/stared-mail-icon.png" : "assets/img/star-logo.png"} />Favorites</div>
-                <div className={folder === 'draft' ? "filter-logo-container clicked" : "filter-logo-container"} onClick={() => this.onSetFilterByMenu('draft')}><img className="new-mail-logo filter-logo" src={folder === 'draft'? "assets/img/new-mail-clicked.png":"assets/img/new-mail-logo.png"} />Drafts</div>
-                <div className={folder === 'trash' ? "filter-logo-container clicked" : "filter-logo-container"} onClick={() => this.onSetFilterByMenu('trash')}><img className="trash-mail-logo filter-logo" src={folder === 'trash'? "assets/img/trash-clicked.png": "assets/img/trash-mails-icon.png"}/>Trash</div>
+                <div className={folder === 'draft' ? "filter-logo-container clicked" : "filter-logo-container"} onClick={() => this.onSetFilterByMenu('draft')}><img className="new-mail-logo filter-logo" src={folder === 'draft' ? "assets/img/new-mail-clicked.png" : "assets/img/new-mail-logo.png"} />Drafts</div>
+                <div className={folder === 'trash' ? "filter-logo-container clicked" : "filter-logo-container"} onClick={() => this.onSetFilterByMenu('trash')}><img className="trash-mail-logo filter-logo" src={folder === 'trash' ? "assets/img/trash-clicked.png" : "assets/img/trash-mails-icon.png"} />Trash</div>
                 <div className={folder === 'sent' ? "filter-logo-container clicked" : "filter-logo-container"} onClick={() => this.onSetFilterByMenu('sent')}><img className="sent-logo filter-logo" src={folder === 'sent' ? "assets/img/sent-clicked-logo.png" : "assets/img/sent-logo.png"} />Sent mails</div>
             </div>
             <div className="mail-main-content">
                 <MailFilter onSetFilter={this.onSetFilter} />
-                <MailList mails={mails} onRemoveMail={this.onRemoveMail} onStarMail={this.onStarMail} onReadMail={this.onReadMail} />
-                {newMail && <MailCompose onAddMail={this.onAddMail} onAddDraftMail={this.onAddDraftMail} />}
+                <MailList mails={mails} onEditMail={this.onEditMail} onRemoveMail={this.onRemoveMail} onStarMail={this.onStarMail} onReadMail={this.onReadMail} newMail={newMail} />
+                {newMail && <MailCompose editMail={editMail} onAddMail={this.onAddMail} onAddDraftMail={this.onAddDraftMail} />}
             </div>
         </section>
     }

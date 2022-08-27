@@ -1,5 +1,6 @@
 import { utilService } from "../../../services/util.service.js"
 import { mailService } from "../services/mail.service.js"
+import { MailCompose } from "./mail-compose.jsx"
 // const { Link } = ReactRouterDOM
 
 export class MailPreview extends React.Component {
@@ -13,7 +14,7 @@ export class MailPreview extends React.Component {
     }
 
     render() {
-        const { mail, onReadMail, onRemoveMail, onStarMail } = this.props
+        const { mail, onReadMail, onRemoveMail, onStarMail, onEditMail } = this.props
         const { isOpen } = this.state
         // const mailDateInHours = new Date(mail.sentAt).toLocaleTimeString('en-US')
         const mailDateInHours = `${new Date(mail.sentAt).getHours()}:${utilService.padNum(new Date(mail.sentAt).getMinutes())}`
@@ -30,7 +31,6 @@ export class MailPreview extends React.Component {
                     {mail.sentAt && <span className="mail-date">
                         {((Date.now() - mail.sentAt) > (1000 * 60 * 60 * 24)) ? mailDateInDays : mailDateInHours}
                     </span>}
-
                 </article >
             </div>
             {(isOpen) && <div className="msg-openned">
@@ -38,6 +38,7 @@ export class MailPreview extends React.Component {
                     <span>{mail.subject}</span>
                     <img onClick={(ev) => onRemoveMail(mail.id, ev)} className="remove-mail-img" src="assets/img/delete-logo.png" />
                     <img onClick={(ev) => onStarMail(mail.id, ev)} className="star-mail-img" src={mail.isStared ? "assets/img/stared-mail-icon.png" : "assets/img/star-mail-icon.png"} />
+                    {!mail.sentAt && <img onClick={(ev) => onEditMail(mail, ev, mail.id)} className="edit-new-mail" src="assets/img/edit-new-mail.png" />}
                 </div>
                 <p>{mail.fullname}<span className="msg-mail-address">{` <${mail.from}>`}</span></p>
                 <p className="msg-body">{mail.body}</p>

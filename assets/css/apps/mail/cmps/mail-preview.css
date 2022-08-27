@@ -84,6 +84,11 @@
     padding: 3px;
     cursor: pointer;
 }
+.edit-new-mail {
+    width: 20px;
+    padding: 3px;
+    cursor: pointer;
+}
 
 .star-mail-img:hover {
     width: 21px;

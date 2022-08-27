@@ -1,12 +1,12 @@
 import { MailPreview } from "./mail-preview.jsx"
 
-export function MailList({ mails, onReadMail, onRemoveMail, onStarMail }) {
+export function MailList({ mails, onReadMail, onEditMail, onRemoveMail, onStarMail, newMail }) {
 
     return <section className="mail-list">
 
         <ul className="mail-container clear-list">
             {(!mails || !mails.length) && <div>There are no mails..</div>}
-            {mails.map((mail) => <li key={mail.id}><MailPreview onRemoveMail={onRemoveMail} onStarMail={onStarMail} onReadMail={onReadMail} mail={mail} /></li>)}
+            {mails.map((mail) => <li key={mail.id}><MailPreview onEditMail={onEditMail} onRemoveMail={onRemoveMail} onStarMail={onStarMail} onReadMail={onReadMail} mail={mail} newMail={newMail} /></li>)}
 
         </ul>
     </section>

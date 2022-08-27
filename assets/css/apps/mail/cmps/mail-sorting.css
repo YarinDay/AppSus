@@ -1,0 +1,18 @@
+.sortByTitle {
+    border-radius: 10px;
+    background-color: var(--clr8);
+    border: none;
+    padding: 7px;
+}
+
+.mail-sorting {
+    display: flex;
+    align-self: center;
+}
+
+.sortByDate {
+    border-radius: 10px;
+    background-color: var(--clr8);
+    border: none;
+    padding: 7px;
+}

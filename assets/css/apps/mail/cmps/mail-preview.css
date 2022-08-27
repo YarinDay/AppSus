@@ -37,6 +37,7 @@
 
 .mail-subject {
     width: 300px;
+    padding-right: 10px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -44,6 +45,10 @@
 
 .mail-fullname {
     width: 200px;
+    padding-right: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .msg-openned {
@@ -84,6 +89,7 @@
     padding: 3px;
     cursor: pointer;
 }
+
 .edit-new-mail {
     width: 20px;
     padding: 3px;
@@ -103,4 +109,8 @@
     color: var(--clr3);
     background-color: var(--clr8);
 
+}
+
+.open-close-nav {
+    display: none;
 }

@@ -12,7 +12,8 @@ export const mailService = {
     sendToTrash,
     toggleStarMail,
     getUnreadMails,
-    addDraftMail
+    addDraftMail,
+    sortMails
 }
 
 const STORAGE_KEY = 'mailsDB'
@@ -333,11 +334,13 @@ function query(filterBy, folder) {
     }
     else if (folder === 'trash') {
         mails = mails.filter(mail => mail.isSentToTrash
-            && mail.to === loggedinUser.email)
+            && (mail.to === loggedinUser.email
+            || mail.from === loggedinUser.email))
     }
     else if (folder === 'stared') {
         mails = mails.filter(mail => mail.isStared
-            && mail.to === loggedinUser.email)
+            && mail.to === loggedinUser.email
+            && !mail.isSentToTrash)
     }
     else if (folder === 'draft') {
         mails = mails.filter(mail => !mail.sentAt
@@ -347,7 +350,8 @@ function query(filterBy, folder) {
     else if (folder === 'sent') {
         mails = mails.filter(mail => mail.from === loggedinUser.email
             && mail.from === loggedinUser.email
-            && mail.sentAt)
+            && mail.sentAt
+            && !mail.isSentToTrash)
     }
 
     if (filterBy) {
@@ -389,6 +393,7 @@ function addNewMail(mail, mailId) {
     mails.push(mail)
     _saveToStorage(mails)
 }
+
 function addDraftMail(mail) {
     const mails = _loadFromStorage()
     const user = loggedInUser()
@@ -430,6 +435,17 @@ function getUnreadMails() {
         if (!mail.isRead && !mail.isSentToTrash && mail.to === loggedinUser.email) unreadMails++
     })
     return unreadMails
+}
+
+function sortMails(sortBy) {
+    const mails = _loadFromStorage()
+    mails.sort((mail1, mail2) => {
+        return sortBy.title === 'ASC' ? mail1.subject.localeCompare(mail2.subject) : mail2.subject.localeCompare(mail1.subject)
+    })
+    mails.sort((mail1, mail2) => {
+        return sortBy.date === 'ASC' ? mail1.sentAt - mail2.sentAt : mail2.sentAt - mail1.sentAt
+    })
+    _saveToStorage(mails)
 }
 
 function loggedInUser() {

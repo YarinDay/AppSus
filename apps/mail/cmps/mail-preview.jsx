@@ -14,7 +14,7 @@ export class MailPreview extends React.Component {
     }
 
     render() {
-        const { mail, onReadMail, onRemoveMail, onStarMail, onEditMail } = this.props
+        const { mail, onReadMail, onRemoveMail, onStarMail, onEditMail, folder } = this.props
         const { isOpen } = this.state
         // const mailDateInHours = new Date(mail.sentAt).toLocaleTimeString('en-US')
         const mailDateInHours = `${new Date(mail.sentAt).getHours()}:${utilService.padNum(new Date(mail.sentAt).getMinutes())}`
@@ -25,7 +25,7 @@ export class MailPreview extends React.Component {
         return <React.Fragment>
             <div className={isMailRead}>
                 <article onClick={() => { this.onIsOpen(), onReadMail(mail.id) }} className={isMailOpen}>
-                    <span className="mail-fullname">{mail.fullname}</span>
+                    <span className="mail-fullname">{folder === 'sent' ? mail.to : mail.fullname}</span>
                     <span className="mail-subject">{mail.subject} -</span>
                     <span className="mail-body">{mail.body}</span>
                     {mail.sentAt && <span className="mail-date">
@@ -40,7 +40,7 @@ export class MailPreview extends React.Component {
                     <img onClick={(ev) => onStarMail(mail.id, ev)} className="star-mail-img" src={mail.isStared ? "assets/img/stared-mail-icon.png" : "assets/img/star-mail-icon.png"} />
                     {!mail.sentAt && <img onClick={(ev) => onEditMail(mail, ev, mail.id)} className="edit-new-mail" src="assets/img/edit-new-mail.png" />}
                 </div>
-                <p>{mail.fullname}<span className="msg-mail-address">{` <${mail.from}>`}</span></p>
+                {folder === 'sent' ? <p>{mail.to}</p> : <p>{mail.fullname}<span className="msg-mail-address">{` <${mail.from}>`}</span></p>}
                 <p className="msg-body">{mail.body}</p>
 
             </div>}

@@ -24,6 +24,67 @@
     background-color: var(--clr8);
     padding: 15px;
     font-size: 1.3rem;
+    margin-right: 5px;
     border-radius: 10px;
     border: none;
+}
+
+#read-mails{
+    border-radius: 10px;
+    background-color: var(--clr8);
+    border: none;
+    padding: 7px;
+}
+
+
+@media (max-width: 1050px) {
+    .mail-subject {
+        width: 100px;
+    }
+
+    .mail-fullname {
+        width: 100px;
+    }
+}
+
+@media (max-width: 800px) {
+    #by-subject {
+        width: 250px;
+        padding: 7px;
+        font-size: 1rem;
+    }
+
+    .open-close-nav {
+        position: fixed;
+        right: 0;
+        display: block;
+        cursor: pointer;
+        border-radius: 4px;
+        padding: 7px;
+        z-index: 10;
+    }
+
+    .mail-compose-container {
+        left: 10px;
+    }
+
+    .menu-logos {
+        position: fixed;
+        left: 0;
+        background-color: white;
+        flex-direction: column;
+        width: 100%;
+        transform: translateY(-120%);
+        transition: transform .7s;
+        
+    }
+
+    .menu-opened {
+        transform: translate(0);
+        transition: transform .6s;
+    }
+
+    .filter-logo-container {
+        border-bottom: 1px solid var(--clr5);
+    }
 }

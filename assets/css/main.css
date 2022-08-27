@@ -20,10 +20,10 @@
 
 
 /* MAIL */
-@import './apps/mail/views/mail-app.css';
-@import './apps/mail/cmps/mail-list.css';
-@import './apps/mail/cmps/mail-preview.css';
 @import './apps/mail/cmps/mail-compose.css';
+@import './apps/mail/cmps/mail-preview.css';
+@import './apps/mail/cmps/mail-list.css';
+@import './apps/mail/views/mail-app.css';
 
 /* NOTES */
 @import './apps/note/views/note-app.css';

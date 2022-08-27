@@ -11,10 +11,6 @@
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 
-.mail-compose-container>* {
-    border-bottom: 1px solid #121212;
-}
-
 .mail-compose-header {
     background-color: var(--clr8);
 }
@@ -61,4 +57,9 @@
 .new-mail-tools {
     margin-top: auto;
     text-align: right;
+}
+
+#to, 
+#subject{
+    padding: 10px;
 }

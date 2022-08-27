@@ -27,7 +27,7 @@ function saveNote(note) {
     note.id = makeId()
     note.isPinned = false
     note.style = {}
-    note.style.backgroundColor = '#78a7a7'
+    note.style.backgroundColor = '#4f5d5d'
     let notes = _loadFromStorage()
     if (note.info.todos) note.info.todos = note.info.todos.split(',')
     if (!notes || !notes.length) {
@@ -37,12 +37,10 @@ function saveNote(note) {
     }
     notes.unshift(note)
     _saveToStorage(notes)
-    console.log('note :', note)
     return Promise.resolve(notes)
 }
 
 function removeNote(noteId) {
-    console.log('noteId :', noteId)
     let notes = _loadFromStorage()
     let noteIdx = notes.findIndex(note => note.id === noteId)
     notes.splice(noteIdx, 1)
@@ -54,7 +52,6 @@ function changeBgc(noteId, bgcColor) {
     let notes = _loadFromStorage()
     let noteIdx = notes.findIndex(note => note.id === noteId)
     notes[noteIdx].style.backgroundColor = bgcColor + ''
-    console.log('notes[noteIdx] :', notes[noteIdx])
     _saveToStorage(notes)
     return Promise.resolve(notes)
 }
@@ -95,7 +92,8 @@ function _createCopyNote(note) {
         info: {
             text: note.info.text,
             title: note.info.title,
-            url: note.info.url,
+            imgUrl: note.info.imgUrl,
+            gifUrl: note.info.gifUrl,
             link: note.info.link,
             todos: note.info.todos
         },
@@ -109,7 +107,18 @@ function _createCopyNote(note) {
 function getNotes() {
     let notes = [
         {
-            id: "n101",
+            id: makeId(),
+            type: "note-img",
+            isPinned: false,
+            info: {
+                imgUrl: "https://media0.giphy.com/media/gePUWJ4AXHu92/giphy.gif?cid=ecf05e4723asuxpwmrooeyq2syxaoyw630dm0sgnuodkm97o&rid=giphy.gif&ct=g"
+            },
+            style: {
+                backgroundColor: "#4f5d5d"
+            }
+        },
+        {
+            id: makeId(),
             type: "note-txt",
             isPinned: false,
             info: {
@@ -117,84 +126,82 @@ function getNotes() {
                 text: "Nobody is perfect. I am perfect."
             },
             style: {
-                backgroundColor: "#78a7a7"
+                backgroundColor: "#4f5d5d"
             }
         },
         {
-            id: "n102",
+            id: makeId(),
             type: "note-img",
             isPinned: false,
             info: {
-                url: "https://i.chzbgr.com/full/9604474880/h5D16816F/dog",
-                title: "That's Bobi"
+                imgUrl: "https://static1.srcdn.com/wordpress/wp-content/uploads/2019/11/Jerry-Rick-Morty-Featured-Social-1710x900.jpg?q=50&fit=contain&w=943&h=&dpr=1.5"
             },
             style: {
-                backgroundColor: "#78a7a7"
+                backgroundColor: "#4f5d5d"
             }
         },
         {
-            id: "n103",
+            id: makeId(),
+            type: "note-img",
+            isPinned: false,
+            info: {
+                imgUrl: "https://media2.giphy.com/media/cL4pqu8GGRIihabgSM/giphy.gif?cid=ecf05e47xfziqfnp397in22l4mggmqmwlje2no7l38kbgsj1&rid=giphy.gif&ct=g"
+            },
+            style: {
+                backgroundColor: "#4f5d5d"
+            }
+        },
+        {
+            id: makeId(),
             type: "note-txt",
             isPinned: false,
             info: {
-                title: "I wouldn't exactly say I'm lazy, ",
+                title: "I wouldn't exactly say I'm lazy ",
                 text: " but it's a good thing that breathing is a reflex."
             },
             style: {
-                backgroundColor: "#78a7a7"
+                backgroundColor: "#4f5d5d"
             }
         },
         {
-            id: "n104",
+            id: makeId(),
             type: "note-todos",
             isPinned: false,
             info: {
-                title: "Finish This!!!!!",
+                title: "Todo's :",
                 todos: [
-                    "Driving liscence" ,
-                    "Coding power" 
+                    "Sleep more than 2 hours ",
+                    "Finish Coding Academy tasks on time",
+                    "Don't afraid when Yaron is yelling at you!"
                 ]
             },
             style: {
-                backgroundColor: "#78a7a7"
+                backgroundColor: "#3046a8"
             }
         },
         {
-            id: "n105",
+            id: makeId(),
             type: "note-video",
             isPinned: false,
             info: {
-                title: "Go-Pro Awards",
-                link: 'http://www.youtube.com/embed/watch?v=3bRgp_GSyBQ'
+                title: "Drake - Laugh Now Cry Later",
+                link: 'https://www.youtube.com/embed/watch?v=JFm7YDVlqnI'
             },
             style: {
-                backgroundColor: "#78a7a7"
+                backgroundColor: "#4f5d5d"
             }
         },
         {
-            id: "n106",
+            id: makeId(),
             type: "note-img",
             isPinned: false,
             info: {
-                url: "../../assets/img/random-shrek.png",
-                title: "Shreki <3"
+                imgUrl: "https://images.unsplash.com/photo-1484417894907-623942c8ee29?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80"
             },
             style: {
-                backgroundColor: "#78a7a7"
+                backgroundColor: "#4f5d5d"
             }
         },
-        {
-            id: "n107",
-            type: "note-video",
-            isPinned: false,
-            info: {
-                label: "BMX Extreme Video",
-                link: 'http://www.youtube.com/embed/watch?v=13OtZFWdhwQ'
-            },
-            style: {
-                backgroundColor: "#78a7a7"
-            }
-        }
     ]
     return notes
 }

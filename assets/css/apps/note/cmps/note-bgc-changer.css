@@ -1,14 +1,17 @@
 .note-bgc-changer {
-    display: inline;
+    /* display: inline; */
+    width: 0;
+    height: 0;
 }
 
 .change-color-container {
     display: flex;
     top: 30px;
     right: 212px;
+    background-color: #363f3fbf;
     position: relative;
-    width: 200px;
-    justify-content: space-evenly;
+    width: 170px;
+    flex-wrap: wrap;
     z-index: 1;
 }
 
@@ -20,7 +23,7 @@
 }
 
 .change-color-container .bgc-default {
-    background-color: #78a7a7;
+    background-color: #4f5d5d;
 }
 
 .change-color-container .bgc-red {
@@ -53,5 +56,14 @@
 }
 
 .change-color-container .bgc-aqua {
-    background-color: r#4bceb3;
+    background-color: #4bceb3;
+}
+
+.change-color-container .bgc-transparent {
+    /* background-color: #202124; */
+}
+
+.change-color-container .bgc-transparent img {
+    width: 30px;
+    height: 30px;
 }

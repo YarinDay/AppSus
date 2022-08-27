@@ -24,6 +24,8 @@ export class NotePreview extends React.Component {
                 return <VideoBox note={note} />
             case 'note-todos':
                 return <TodosBox note={note} />
+            case 'note-gif':
+                return <GifBox note={note} />
         }
     }
 
@@ -51,7 +53,14 @@ export function TextBox({ note }) {
 
 export function ImgBox({ note }) {
     return <section style={{ backgroundColor: note.style.backgroundColor, backgroundImage: `url(note.info.url)` }} className="image-box-container box-container">
-        <div className="img-container"><img src={note.info.url} /></div>
+        <div className="img-container"><img src={note.info.imgUrl} /></div>
+        <span className="note-title note-title-img">{note.info.title}</span>
+    </section>
+}
+
+export function GifBox({ note }) {
+    return <section style={{ backgroundColor: note.style.backgroundColor, backgroundImage: `url(note.info.url)` }} className="image-box-container box-container">
+        <div className="gif-container"><img src={note.info.gifUrl} /></div>
         <span className="note-title note-title-img">{note.info.title}</span>
     </section>
 }

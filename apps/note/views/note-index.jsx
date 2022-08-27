@@ -3,10 +3,11 @@ import { WriteNote } from "../cmps/write-note.jsx"
 import { noteService } from "../../note/services/note.service.js"
 
 //Todo's For this App {
-// * 
+// *
+// .*
 // ?
+// ! i have changed (Bod BGC, In header the bgc and color)
 // ! --- Look at the presentation and see whats missing!
-//Todo - Finish the todos Part (Get a string separated by (,)and just enter each line to Li inside UL)
 //Todo - Start Working on Media-Queries!!!!!!!!!
 //Todo - Work on the share BTN
 //Todo - Work on the gif

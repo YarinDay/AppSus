@@ -1,8 +1,9 @@
-
 .note-list-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    /* grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); */
+    /* grid-template-columns: repeat(auto-fill, minmax(257px, 1fr)); */
+    grid-template-columns: repeat(auto-fit, minmax(276px, 1fr));
+    justify-items: center;
+    /* background-color: #202124; */
     gap: 30px;
 }
 
@@ -10,4 +11,11 @@
     display: block;
     height: 30px;
     border-bottom: 1px solid #0000002c;
+}
+
+@media (max-width: 350px) {
+    .note-list-container {
+        grid-template-columns: none;
+    }
+
 }

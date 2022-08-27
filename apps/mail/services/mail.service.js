@@ -334,11 +334,13 @@ function query(filterBy, folder) {
     }
     else if (folder === 'trash') {
         mails = mails.filter(mail => mail.isSentToTrash
-            && mail.to === loggedinUser.email)
+            && (mail.to === loggedinUser.email
+            || mail.from === loggedinUser.email))
     }
     else if (folder === 'stared') {
         mails = mails.filter(mail => mail.isStared
-            && mail.to === loggedinUser.email)
+            && mail.to === loggedinUser.email
+            && !mail.isSentToTrash)
     }
     else if (folder === 'draft') {
         mails = mails.filter(mail => !mail.sentAt
@@ -348,7 +350,8 @@ function query(filterBy, folder) {
     else if (folder === 'sent') {
         mails = mails.filter(mail => mail.from === loggedinUser.email
             && mail.from === loggedinUser.email
-            && mail.sentAt)
+            && mail.sentAt
+            && !mail.isSentToTrash)
     }
 
     if (filterBy) {

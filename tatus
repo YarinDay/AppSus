@@ -1,0 +1,217 @@
+[33mcommit e80e31b74965ac00f2156298dc07224c2a708db1[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Merge: 84ded64 b722aa1
+Author: Beker <orbeker7@gmail.com>
+Date:   Sun Aug 28 00:52:51 2022 +0300
+
+    Merge branch 'main' of https://github.com/YarinDay/AppSus
+
+[33mcommit b722aa1d18f706f57fc3ffc427df4e2c5f266402[m
+Author: Yarin <yarindayan11@gmail.com>
+Date:   Sat Aug 27 23:01:07 2022 +0300
+
+    fixed problems with git, again
+
+[33mcommit db596cd3b395c56b4ae2dd9d99c78a013bc23cae[m
+Author: Yarin <yarindayan11@gmail.com>
+Date:   Sat Aug 27 22:49:24 2022 +0300
+
+    deleted console logs
+
+[33mcommit b62ddda91033b24e89058356f98eaf5f066231f9[m
+Author: Yarin <yarindayan11@gmail.com>
+Date:   Sat Aug 27 22:45:25 2022 +0300
+
+    fixed sorting and UI
+
+[33mcommit 3bb577d736bb7ed08cfb1071e365f3ddb9e2e71a[m
+Author: Yarin <yarindayan11@gmail.com>
+Date:   Sat Aug 27 21:59:10 2022 +0300
+
+    fix bugs and added sorting
+
+[33mcommit 84ded6402f97c6c0185ebaaf1387e237ef8a3d41[m
+Author: Beker <orbeker7@gmail.com>
+Date:   Sat Aug 27 21:33:53 2022 +0300
+
+    did the last changes, ready to upload
+
+[33mcommit 1a8105b0e01ffbfbcbf95775e3547cb96cfb9457[m
+Author: Yarin <yarindayan11@gmail.com>
+Date:   Sat Aug 27 21:18:22 2022 +0300
+
+    Added send to in sent mode, fixed burger button
+
+[33mcommit 44749d9d093f321caa7476c641b6239f832b8911[m
+Merge: 11889cf 3acfdd8
+Author: Yarin <yarindayan11@gmail.com>
+Date:   Sat Aug 27 19:54:23 2022 +0300
+
+    Merge branch 'main' of https://github.com/YarinDay/AppSus
+
+[33mcommit 3acfdd8d6792c725c572aec75bc1b85e600adb8e[m
+Author: Beker <orbeker7@gmail.com>
+Date:   Sat Aug 27 19:54:10 2022 +0300
+
+    Worked at all functionallity need to finish a llitle bit design
+
+[33mcommit 11889cfed0ac1a8492897a0c881ebaa4548d6efe[m
+Author: Yarin <yarindayan11@gmail.com>
+Date:   Sat Aug 27 19:53:05 2022 +0300
+
+    can change drafts
+
+[33mcommit bdd974a2fd6d2c4f2ab0e50427633b74f08e7431[m
+Merge: a3d138e b849c93
+Author: Beker <orbeker7@gmail.com>
+Date:   Fri Aug 26 23:13:23 2022 +0300
+
+    Merge branch 'main' of https://github.com/YarinDay/AppSus
+
+[33mcommit a3d138eaede3e355b4d29c6ea8ebb1e72af9febe[m
+Author: Beker <orbeker7@gmail.com>
+Date:   Fri Aug 26 23:13:17 2022 +0300
+
+    all the main functionallity has been done, need to finish last details on the noteApp
+
+[33mcommit b849c938f862216d8d5e33068f6f058a81c50dd9[m
+Author: Yarin <yarindayan11@gmail.com>
+Date:   Fri Aug 26 18:46:02 2022 +0300
+
+    Mail App: Made a good UI
+
+[33mcommit cd812ab9630d240256ec00fe6c3fe310c5197bd2[m
+Author: Yarin <yarindayan11@gmail.com>
+Date:   Fri Aug 26 02:58:23 2022 +0300
+
+    added the option to use drafts and fix bugs on filters
+
+[33mcommit 973f35f096777b2cd29648463f59a7d5a67b3fb4[m
+Merge: 2ea42fe 129ed9c
+Author: Beker <orbeker7@gmail.com>
+Date:   Thu Aug 25 21:00:51 2022 +0300
+
+    Merge branch 'main' of https://github.com/YarinDay/AppSus
+
+[33mcommit 2ea42fe4d03c6c0d01d187c52b8b57f5099a9475[m
+Author: Beker <orbeker7@gmail.com>
+Date:   Thu Aug 25 21:00:40 2022 +0300
+
+    finished copy + remove + notes
+
+[33mcommit 129ed9ca3c13f35fbcc01d6cdb038edc38f4ffd6[m
+Author: Yarin <yarindayan11@gmail.com>
+Date:   Thu Aug 25 20:55:53 2022 +0300
+
+    added the option to filter + add new mail
+
+[33mcommit 1da2eff3d9b9b89f0c0edb25dca8831de40214f5[m
+Merge: e3d2579 59f74f5
+Author: Beker <orbeker7@gmail.com>
+Date:   Thu Aug 25 13:41:49 2022 +0300
+
+    Merge branch 'main' of https://github.com/YarinDay/AppSus
+
+[33mcommit e3d25792aaf89d153fd1b82bb76ff45a687c0d8f[m
+Author: Beker <orbeker7@gmail.com>
+Date:   Thu Aug 25 13:41:46 2022 +0300
+
+    got the props of the notes cannot see the data of the note yet
+
+[33mcommit 59f74f515ce63635b54576571a75611d07c131f6[m
+Author: Yarin <yarindayan11@gmail.com>
+Date:   Thu Aug 25 13:41:44 2022 +0300
+
+    added a remove option to mails
+
+[33mcommit 0e50056bd09e2f623010f14fafbfc086c074f785[m
+Merge: c7cf19e e6d448a
+Author: Beker <orbeker7@gmail.com>
+Date:   Thu Aug 25 01:13:28 2022 +0300
+
+    Merge branch 'main' of https://github.com/YarinDay/AppSus
+
+[33mcommit c7cf19e2dd04e004db7adbace46044f1713dbac4[m
+Author: Beker <orbeker7@gmail.com>
+Date:   Thu Aug 25 01:13:23 2022 +0300
+
+    Worked on the Write-Note section + note-list section
+
+[33mcommit e6d448a5b4503db0cb47597b9f5e7e8f498375c7[m
+Author: Yarin <yarindayan11@gmail.com>
+Date:   Thu Aug 25 01:01:42 2022 +0300
+
+    added unread mails
+
+[33mcommit 1a86a51a20e57f0d35446b93f2fa8a12907ee0ed[m
+Author: Beker <orbeker7@gmail.com>
+Date:   Wed Aug 24 19:30:56 2022 +0300
+
+    added Notes preview (cannot add note yet!)
+
+[33mcommit 495fb79c870727cf32fc77f25f69ca5ce94185bc[m
+Author: Yarin <yarindayan11@gmail.com>
+Date:   Wed Aug 24 19:30:15 2022 +0300
+
+    had bug, onOpen works
+
+[33mcommit 73429067494cc2347985eab004c9f410fa1bda99[m
+Author: Yarin <yarindayan11@gmail.com>
+Date:   Wed Aug 24 19:28:32 2022 +0300
+
+    added onOpen to mails
+
+[33mcommit c1b5c5db11dc2f012f9100e008a8efe96aa1d58c[m
+Merge: 9e91f98 57be46d
+Author: Yarin <yarindayan11@gmail.com>
+Date:   Wed Aug 24 16:37:32 2022 +0300
+
+    changed imgs
+
+[33mcommit 9e91f98d0fa3406ebcd922f4afaac8c73a94ea66[m
+Merge: 4eeb4ac 5b49d7b
+Author: Yarin <yarindayan11@gmail.com>
+Date:   Wed Aug 24 16:35:24 2022 +0300
+
+    changed imgs
+
+[33mcommit 57be46d41a59b195e76e9be17b8cc9fac392818c[m
+Author: Beker <orbeker7@gmail.com>
+Date:   Wed Aug 24 16:33:42 2022 +0300
+
+    fixed the button in writeNote,
+
+[33mcommit 4eeb4acaffbd0a51bd8874df21ef13ce6ee0e2c1[m
+Author: Yarin <yarindayan11@gmail.com>
+Date:   Wed Aug 24 15:38:00 2022 +0300
+
+    Worked on Mails
+
+[33mcommit 5b49d7b025811989fb4385091c31c85a70bd6e3d[m
+Author: Beker <orbeker7@gmail.com>
+Date:   Wed Aug 24 15:36:46 2022 +0300
+
+    Worked on the Notes
+
+[33mcommit af0c1d9805be9fe2fd40720f8e76428580f99f90[m
+Author: Yarin <yarindayan11@gmail.com>
+Date:   Wed Aug 24 13:17:09 2022 +0300
+
+    trying something
+
+[33mcommit 356117cc65a81b13176f3e5bd1859d08e9b82d0b[m
+Author: Yarin <yarindayan11@gmail.com>
+Date:   Wed Aug 24 13:08:24 2022 +0300
+
+    added logos
+
+[33mcommit 9ff36e832fe626e85d057bc9394ba2997f87dbd5[m
+Author: Beker <orbeker7@gmail.com>
+Date:   Wed Aug 24 12:00:52 2022 +0300
+
+    Added a logo and fixed the header
+
+[33mcommit 9f3da53bfc164e352d1b7804947c94fcd7f3d79d[m
+Author: Yarin <yarindayan11@gmail.com>
+Date:   Wed Aug 24 11:43:07 2022 +0300
+
+    first commit

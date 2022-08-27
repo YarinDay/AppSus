@@ -118,18 +118,6 @@ function getNotes() {
         },
         {
             id: makeId(),
-            type: "note-txt",
-            isPinned: false,
-            info: {
-                title: "I am nobody...",
-                text: "Nobody is perfect. I am perfect."
-            },
-            style: {
-                backgroundColor: "#4f5d5d"
-            }
-        },
-        {
-            id: makeId(),
             type: "note-img",
             isPinned: false,
             info: {
@@ -149,6 +137,18 @@ function getNotes() {
             },
             style: {
                 backgroundColor: "#4f5d5d"
+            }
+        },
+        {
+            id: makeId(),
+            type: "note-txt",
+            isPinned: false,
+            info: {
+                title: "Lorem : ",
+                text: " Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu."
+            },
+            style: {
+                backgroundColor: "#954242"
             }
         },
         {

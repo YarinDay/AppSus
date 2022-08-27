@@ -436,14 +436,12 @@ function getUnreadMails() {
 
 function sortMails(sortBy) {
     const mails = _loadFromStorage()
-    console.log('before sorting', mails)
     mails.sort((mail1, mail2) => {
         return sortBy.title === 'ASC' ? mail1.subject.localeCompare(mail2.subject) : mail2.subject.localeCompare(mail1.subject)
     })
     mails.sort((mail1, mail2) => {
         return sortBy.date === 'ASC' ? mail1.sentAt - mail2.sentAt : mail2.sentAt - mail1.sentAt
     })
-    console.log('after sorting', mails)
     _saveToStorage(mails)
 }
 

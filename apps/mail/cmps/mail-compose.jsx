@@ -18,10 +18,10 @@ export class MailCompose extends React.Component {
 
     componentDidMount() {
         if (this.props.editMail) {
-            this.setState({ newMail: this.props.editMail }, console.log(this.state.newMail))
+            this.setState({ newMail: this.props.editMail })
         }
         this.intervalId = setInterval(() => {
-            this.setState({ newMail: this.state.newMail }, console.log(this.state.newMail))
+            this.setState({ newMail: this.state.newMail })
         }, 5000)
     }
 
@@ -30,8 +30,6 @@ export class MailCompose extends React.Component {
         if (!newMail.sentAt && newMail.to !== '') {
             this.props.onAddDraftMail(newMail)
         }
-        console.log(newMail);
-        if (newMail.id) console.log(newMail.id);
         clearInterval(this.intervalId)
     }
 

@@ -63,7 +63,6 @@ export class MailIndex extends React.Component {
 
     toggleNewMail = () => {
         this.setState({ newMail: !this.state.newMail })
-        console.log(this.state.editMail);
         this.setState({ editMail: null })
         this.setState({ openMenu: !this.state.openMenu })
     }
@@ -77,7 +76,6 @@ export class MailIndex extends React.Component {
 
     onEditMail = (mail, ev, mailId) => {
         ev.preventDefault();
-        // console.log(mail)
         this.setState({ editMail: mail })
         this.setState({ newMail: true })
         this.setState({ editMailId: mailId })
@@ -94,9 +92,6 @@ export class MailIndex extends React.Component {
         if (mail.subject === '') mail.subject = 'No subject Msg'
         if (!mail.id) {
             mailService.addDraftMail(mail)
-        } else {
-            console.log(mail);
-            // mailService.editDraftMail(mail)
         }
         this.loadMails() // maybe not necessary
     }
@@ -111,7 +106,6 @@ export class MailIndex extends React.Component {
     }
 
     onSort = (sortBy) => {
-        console.log(sortBy)
         mailService.sortMails(sortBy)
         this.loadMails()
     }
